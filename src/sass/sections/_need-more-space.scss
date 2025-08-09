@@ -1,0 +1,216 @@
+.need-more-space {
+    padding: 62px 0 120px;
+
+    &--variation-2 {
+        padding: 0;
+
+        .wrap {
+
+            @media screen and (max-width: 1023px) {
+                padding: 0;
+            }
+        }
+    }
+
+    &__header {
+        padding: 64px;
+        clip-path: polygon(0 0, calc(100% - 75px) 0, 100% 75px, 100% 100%, 0 100%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: $orange;
+        text-align: center;
+
+        @media screen and (max-width: 1023px) {
+            padding: 40px 60px;
+            clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
+        }
+    }
+
+    &__title {
+        font-size: 40px;
+        font-weight: 700;
+        color: $white;
+        line-height: 1.1;
+
+        @media screen and (max-width: 1023px) {
+            font-size: 32px;
+        }
+    }
+
+    &__desc {
+        margin-top: 24px;
+        color: $white;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.4;
+
+        strong {
+            font-weight: 700;
+        }
+    }
+
+    &__columns {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        @media screen and (max-width: 1023px) {
+            flex-direction: column;
+        }
+    }
+
+    &__item {
+        $s: &;
+        width: 50%;
+        padding: 56px 148px 56px 88px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        @media screen and (max-width: 1023px) {
+            width: 100%;
+            padding: 32px;
+        }
+
+        &:last-child {
+            padding: 56px 88px 56px 148px;
+        }
+
+        &--self-storage {
+            background-color: #F9F9F9;
+        }
+
+        &--galpoes-urbanos {
+            background-color: $dark-gray;
+        }
+
+        &--galpoes-flexiveis {
+            background-color: #D5D5C3
+        }
+
+        &--galpoes-urbanos-park {
+            background-color: #D5D5C3;
+        }
+
+        &--galpoes-urbanos-single {
+            background-color: $purple;
+        }
+
+        &-pre-desc {
+            border: 2px solid $orange;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            #{$s}--galpoes-flexiveis & {
+                border-color: $dark-gray;
+            }
+
+            &-icon {
+                background-color: $orange;
+                padding: 12px;
+
+                #{$s}--galpoes-flexiveis & {
+                    background-color: $dark-gray;
+                }
+            }
+
+            &-name {
+                padding: 12px;
+                font-size: 20px;
+                color: $dark-gray;
+                font-weight: 300;
+                max-width: 115px;
+
+                #{$s}--galpoes-urbanos & {
+                    color: $white;
+                }
+
+                #{$s}--galpoes-urbanos-single & {
+                    color: $white;
+                }
+
+                &--complement {
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 260px;
+                }
+
+                em {
+                    font-style: italic;
+                    font-weight: 200;
+                }
+            }
+        }
+
+        &-desc {
+            margin-top: 26px;
+            font-size: 20px;
+            color: $dark-gray;
+            line-height: 1.4;
+            font-weight: 300;
+
+            #{$s}--galpoes-urbanos & {
+                color: $white;
+            }
+
+            #{$s}--galpoes-urbanos-single & {
+                color: $white;
+            }
+
+            strong {
+                font-weight: 700;
+            }
+        }
+
+        &-button-area {
+            margin-top: 32px;
+        }
+
+        &-button {
+            padding: 18px 16px;
+            border: 2px solid $orange;
+            font-weight: 700;
+            font-size: 18px;
+            color: $orange;
+            text-align: center;
+            transition: .4s;
+            text-transform: lowercase;
+            line-height: 1.15;
+            display: inline-block;
+            min-width: 212px;
+
+            #{$s}--galpoes-urbanos & {
+                color: $white;
+                border-color: $white;
+            }
+
+            #{$s}--galpoes-flexiveis & {
+                color: $dark-gray;
+                border-color: $dark-gray;
+            }
+
+            #{$s}--galpoes-urbanos-single & {
+                color: $white;
+                border-color: $white;
+            }
+
+            &:hover {
+                background-color: rgba($orange, .2);
+            }
+        }
+    }
+
+    &__float-icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        @media screen and (max-width: 1023px) {
+            left: unset;
+            right: 0;
+            transform-origin: top;
+            transform: rotate(90deg);
+        }
+    }
+}

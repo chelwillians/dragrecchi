@@ -1,0 +1,140 @@
+.float-buttons {
+    display: flex;
+    gap: 16px;
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 900;
+    width: 100%;
+    pointer-events: none;
+    justify-content: flex-end;
+
+    @media screen and (max-width: 1023px) {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+
+    &__item {
+        $s: &;
+        position: relative;
+        pointer-events: all;
+        padding: 16px 18px;
+        font-weight: 700;
+        color: $white;
+        font-size: 18px;
+        background-color: $orange;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        // @media screen and (max-width: 1023px) {
+        //     border-radius: 50%;
+        //     width: 58px;
+        //     height: 58px;
+        // }
+
+        // &:hover {
+        //     &::before {
+        //         animation: blur 2s linear infinite;
+        //     }
+        // }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: calc(100% + 8px);
+            height: calc(100% + 8px);
+            background: rgba(255, 132, 0, 0.3);
+            backdrop-filter: blur(3px);
+            z-index: -1;
+
+            // @media screen and (max-width: 1023px) {
+            //     border-radius: 50%;
+            // }
+        }
+
+        &--request-quote {
+            span {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+
+                // @media screen and (max-width: 1023px) {
+                //     font-size: 0;
+                //     gap: 0;
+                // }
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    -webkit-mask: $arrow-request-quote no-repeat;
+                    mask: $arrow-request-quote no-repeat;
+                    background: $white;
+                    width: 20px;
+                    height: 20px;
+                    mask-size: 100%;
+
+                    // @media screen and (max-width: 1023px) {
+                    //     display: none;
+                    // }
+                }
+
+                // &::after {
+                //     content: '';
+                //     display: inline-block;
+                //     -webkit-mask: $paper no-repeat;
+                //     mask: $paper no-repeat;
+                //     background: $white;
+                //     width: 20px;
+                //     height: 26px;
+                //     mask-size: 100%;
+
+                //     // @media screen and (min-width: 1024px) {
+                //     //     display: none;
+                //     // }
+                // }
+            }
+
+        }
+
+        &--whatsapp {
+            background-color: #4BC259;
+            // @media screen and (max-width: 1023px) {
+            //     border-radius: 50%;
+            // }
+
+            &::before {
+                background: rgba(75, 194, 89, 0.3);
+
+                // @media screen and (max-width: 1023px) {
+                //     border-radius: 50%;
+                // }
+            }
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+
+                // @media screen and (max-width: 1023px) {
+                //     font-size: 0;
+                //     gap: 0;
+                // }
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    -webkit-mask: $whatsapp no-repeat;
+                    mask: $whatsapp no-repeat;
+                    background: $white;
+                    width: 24px;
+                    height: 24px;
+                    mask-size: 100%;
+                }
+            }
+
+        }
+    }
+}

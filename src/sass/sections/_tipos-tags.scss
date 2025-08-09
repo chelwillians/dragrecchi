@@ -1,0 +1,42 @@
+.tipos-tags {
+    background-color: #F9F9F9;
+    padding-top: 24px;
+
+    @media screen and (min-width: 1024px) {
+        display: block;
+        padding-top: 40px;
+    }
+
+    &__list {
+        padding-bottom: 24px;
+        overflow: unset !important;
+    }
+
+    .swiper-wrapper{
+        gap: 8px;
+    }
+
+    &-item {
+        background-color: $white;
+        padding: 10px 16px;
+        border: 1px solid #E6E6E6;
+        border-radius: 52px;
+        font-weight: 500;
+        width: auto;
+        display: inline-block;
+        color: $dark-gray;
+        transition: .5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba($orange, .2);
+        }
+
+        &.active {
+            background-color: $orange;
+            border-color: $orange;
+            box-shadow: 0px 34px 14px rgba(0, 0, 0, 0.01), 0px 19px 12px rgba(0, 0, 0, 0.05), 0px 9px 9px rgba(0, 0, 0, 0.09), 0px 2px 5px rgba(0, 0, 0, 0.1);
+            color: $white;
+        }
+    }
+}

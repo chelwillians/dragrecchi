@@ -1,0 +1,126 @@
+.testimonials {
+    $s: &;
+    padding: 80px 0 60px;
+
+    &--big-pt {
+        @media screen and (max-width: 1023px) {
+            padding-top: 110px;
+        }
+    }
+
+    &--half-clay {
+        position: relative;
+
+        &::after {
+            content: '';
+            background-color: $clay;
+            width: 100%;
+            height: 80%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        .wrap {
+            z-index: 10;
+        }
+    }
+
+    &__call {
+        text-align: center;
+        font-size: 20px;
+        line-height: 1.4;
+        font-weight: 300;
+
+        #{$s}--half-clay &{
+            color: $dark-gray;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+    }
+
+    &__title {
+        color: $orange;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 1.1;
+        text-align: center;
+        max-width: 612px;
+        margin: 8px auto 0;
+
+        #{$s}--half-clay &{
+            color: $dark-gray;
+        }
+
+        strong {
+            color: $orange;
+            font-weight: 700;
+        }
+    }
+
+    &__list {
+        margin-top: 44px;
+        overflow: unset !important;
+
+    }
+
+    &__item {
+        position: relative;
+        background: #FFFFFF;
+        padding: 32px;
+        box-shadow: 0px 48px 19px rgba(0, 0, 0, 0.01), 0px 27px 16px rgba(0, 0, 0, 0.02), 0px 12px 12px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(0, 0, 0, 0.04);
+        max-width: 455px;
+
+        height: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &::after {
+            content: '';
+            width: 155px;
+            height: 4px;
+            background-color: $orange;
+            position: absolute;
+            left: 32px;
+            bottom: -2px;
+            display: inline-block;
+        }
+
+        &-text {
+            width: 100%;
+            color: $dark-gray;
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.4;
+            margin-top: 32px;
+        }
+
+        &-author {
+            margin-top: 40px;
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            min-width: 80px;
+            gap: 24px;
+        }
+
+        &-name {
+            font-size: 24px;
+            color: $orange;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        &-position {
+            font-weight: 300;
+            color: $dark-gray;
+            font-size: 20px;
+            font-style: italic;
+            line-height: 1.2;
+        }
+    }
+}

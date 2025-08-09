@@ -1,0 +1,97 @@
+.goods-shop {
+    position: relative;
+    background-color: #6C6CFF;
+    padding: 98px 0 94px;
+
+    @media screen and (max-width: 1023px) {
+        padding: 24px 0 0;
+    }
+
+    &__content {
+        position: relative;
+        max-width: 704px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 50;
+
+        @media screen and (max-width: 1023px) {
+            padding-bottom: 32px;
+        }
+    }
+
+    &__tag {
+        padding: 10px 16px;
+        font-size: 28px;
+        line-height: 1.1;
+        font-weight: 300;
+        color: $white;
+        background-color: $dark-gray;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        text-transform: uppercase;
+
+        strong {
+            font-weight: 700;
+        }
+
+        &::before {
+            content: '';
+            display: inline-block;
+            -webkit-mask: $tag-icon no-repeat;
+            mask: $tag-icon no-repeat;
+            background: $orange;
+            width: 14px;
+            height: 14px;
+            mask-size: 100%;
+        }
+
+        &::after {
+            content: '';
+            display: inline-block;
+            -webkit-mask: $tag-icon no-repeat;
+            mask: $tag-icon no-repeat;
+            background: $orange;
+            width: 14px;
+            height: 14px;
+            mask-size: 100%;
+            transform: rotate(180deg);
+        }
+    }
+
+    &__title {
+        margin-top: 24px;
+        font-size: 40px;
+        color: $white;
+        font-weight: 700;
+        line-height: 1.1;
+    }
+
+    &__desc {
+        margin-top: 30px;
+        color: $white;
+        line-height: 1.4;
+
+        @media screen and (max-width: 1023px) {
+            font-size: 20px;
+        }
+    }
+
+    &__image {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 35%;
+        object-fit: cover;
+
+        @media screen and (max-width: 1023px) {
+            position: relative;
+            width: 100%;
+            height: 248px;
+            display: block;
+        }
+    }
+}

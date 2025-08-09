@@ -1,0 +1,45 @@
+.simulate {
+    position: relative;
+    padding: 135px 0 0;
+
+    @media screen and (max-width: 1023px) {
+        padding: 64px 0 0;
+    }
+
+    &__title {
+        font-size: 48px;
+        font-weight: 300;
+        line-height: 1.1;
+        color: $dark-gray;
+        display: block;
+        text-align: center;
+
+        @media screen and (max-width: 1023px) {
+            font-size: 32px;
+        }
+
+        strong {
+            font-weight: 700;
+
+            @media screen and (max-width: 1023px) {
+                display: block;
+            }
+        }
+    }
+
+    &__calculator {
+        margin-top: 56px;
+    }
+
+    &__float-icon {
+        display: none;
+        position: absolute;
+        right: 64px;
+        top: -40px;
+        animation: spinner 16s linear infinite;
+
+        @media screen and (min-width: 1024px) {
+            display: block;
+        }
+    }
+}

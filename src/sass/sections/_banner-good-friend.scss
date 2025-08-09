@@ -1,0 +1,81 @@
+.banner-good-friend {
+    position: relative;
+    background-color: $orange;
+    padding: 40px 0 248px;
+    margin-bottom: 185px;
+    z-index: 50;
+
+    @media screen and (min-width: 1024px) {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .wrap {
+        position: unset;
+
+        @media screen and (min-width: 1024px) {
+            position: relative;
+            min-height: 462px;
+            padding: 76px 0 85px;
+        }
+    }
+
+    &__title {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and (min-width: 1024px) {
+            align-items: flex-start;
+        }
+    }
+
+    &__letters {
+        &--mobile {
+            @media screen and (min-width: 1024px) {
+                display: none;
+            }
+        }
+
+        &--desk {
+            display: none;
+
+            @media screen and (min-width: 1024px) {
+                display: block;
+            }
+        }
+    }
+
+    &__right {
+        position: absolute;
+        right: 0;
+        bottom: -185px;
+
+        @media screen and (min-width: 1024px) {
+            bottom: unset;
+            top: -10px;
+        }
+    }
+
+    &__image {
+        position: relative;
+        width: 100%;
+        left: 0;
+
+        @media screen and (min-width: 1024px) {
+            max-width: 514px;
+        }
+    }
+}

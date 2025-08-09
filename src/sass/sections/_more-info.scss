@@ -1,0 +1,137 @@
+.more-info {
+    position: relative;
+    background-color: $dark-gray;
+    padding: 80px 0;
+
+    @media screen and (max-width: 1023px) {
+        padding: 0;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    &__content {
+        max-width: 482px;
+
+        @media screen and (max-width: 1023px) {
+            padding: 40px 0 24px;
+        }
+    }
+
+    &__title {
+        font-size: 56px;
+        font-weight: 250;
+        color: $white;
+        line-height: 1;
+
+        @media screen and (max-width: 1023px) {
+            font-size: 40px;
+        }
+
+        strong {
+            display: block;
+            font-weight: 700;
+            color: $orange
+        }
+    }
+
+    &__desc {
+        margin-top: 40px;
+        color: $white;
+        line-height: 1.4;
+        font-size: 20px;
+        font-weight: 300;
+
+        p {
+            margin-bottom: 16px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+
+            li {
+                margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &::before {
+                    content: '+ ';
+                    color: $orange;
+                    display: inline-block;
+                    padding-right: 8px;
+                }
+            }
+        }
+    }
+
+    &__button {
+        padding: 18px 16px;
+        border: 2px solid $orange;
+        font-weight: 700;
+        font-size: 18px;
+        color: $orange;
+        text-align: center;
+        transition: .4s;
+        text-transform: lowercase;
+        line-height: .9;
+        display: inline-block;
+        min-width: 298px;
+        margin-top: 44px;
+
+        @media screen and (max-width: 1023px) {
+            width: 100%;
+        }
+
+        &--float {
+            margin-top: 0;
+            position: absolute;
+            right: 50%;
+            top: 32px;
+            transform: translateX(calc(100% + 32px));
+            z-index: 50;
+            background-color: $dark-gray;
+
+            @media screen and (max-width: 1023px) {
+                top: 182px;
+                left: 24px;
+                right: unset;
+                transform: unset;
+                width: auto;
+            }
+
+            &:hover {
+                background-color: rgba($dark-gray, .8) !important;
+            }
+        }
+
+        &:hover {
+            background-color: rgba($orange, .8);
+            color: $white;
+        }
+    }
+
+    &__image {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        object-fit: cover;
+        width: 50%;
+
+        @media screen and (max-width: 1023px) {
+            width: 100%;
+            position: relative;
+            height: 254px;
+        }
+    }
+}

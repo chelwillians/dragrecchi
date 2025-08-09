@@ -1,0 +1,65 @@
+.safety {
+    padding: 40px 0;
+
+    @media screen and (min-width: 1024px) {
+        padding-top: 104px;
+    }
+
+    &__icon {
+        display: none;
+
+        @media screen and (min-width: 1024px) {
+            display: inline-block;
+            margin-bottom: 48px;
+        }
+    }
+
+    .wrap {
+        @media screen and (min-width: 1024px) {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+    }
+
+    &__text {
+        line-height: 1.4;
+        color: $dark-gray;
+        font-weight: 300;
+        font-size: 20px;
+
+        @media screen and (min-width: 1024px) {
+            width: 50%;
+            border-bottom: 1px solid #E6E6E6;
+        }
+
+        .orange {
+            color: $orange;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 24px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__illustration {
+        margin-top: 34px;
+        width: 100%;
+        border-bottom: 1px solid #E6E6E6;
+        padding-bottom: 44px;
+
+        @media screen and (min-width: 1024px) {
+            width: 50%;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+    }
+}
