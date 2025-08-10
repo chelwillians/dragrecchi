@@ -1,9 +1,8 @@
 .main-header {
     $header: &;
-    border-bottom: 1px solid #D9D9D9;
-    z-index: 950;
+    z-index: 999;
     position: relative;
-    background: white;
+    background: $brown;
     transition: .4s;
 
     &.is-fixed {
@@ -29,31 +28,12 @@
         position: relative;
         padding: 24px 0;
         z-index: 902;
-        max-width: 190px;
-
-        &::after {
-            content: '';
-            width: 100vw;
-            height: 100%;
-            background-color: $white;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 902;
-
-            @media screen and (min-width: 1024px) {
-                display: none;
-            }
-        }
+        max-width: 124px;
 
         img {
             position: relative;
             width: 100%;
             z-index: 903;
-        }
-
-        @media screen and (min-width: 1024px) {
-            max-width: unset;
         }
     }
 
@@ -66,7 +46,6 @@
         top: 0;
         left: 0;
         z-index: 901;
-        background-color: $white;
         padding: 132px 32px 32px;
         overflow: scroll;
         box-sizing: border-box;
@@ -125,9 +104,9 @@
 
         &-button {
             padding: 20px 40px;
-            border: 2px solid $orange;
+            border: 2px solid $black;
             font-weight: 700;
-            color: $dark-gray;
+            color: $black;
             text-align: center;
             transition: .4s;
             text-transform: lowercase;
@@ -141,7 +120,7 @@
             }
 
             &:hover {
-                background-color: rgba($orange, .2);
+                background-color: rgba($black, .2);
             }
         }
 
@@ -156,7 +135,7 @@
             }
 
             a {
-                color: $dark-gray;
+                color: $gold;
                 line-height: 1.2;
                 height: 100%;
                 display: flex;
@@ -165,13 +144,12 @@
 
                 &:hover {
                     font-weight: 700;
-                    color: $orange;
                 }
 
             }
 
             span {
-                color: $dark-gray;
+                color: $black;
                 line-height: 1.2;
                 transition: .4s;
 
@@ -183,7 +161,7 @@
 
                 &:hover {
                     font-weight: 700;
-                    color: $orange;
+                    color: $black;
                 }
 
                 a {
@@ -230,7 +208,7 @@
             &.active {
                 a {
                     font-weight: 700;
-                    color: $orange;
+                    color: $black;
                 }
             }
 
@@ -241,7 +219,7 @@
                 position: absolute;
                 bottom: -1px;
                 left: 0;
-                background-color: $orange;
+                background-color: $black;
                 opacity: 0;
                 transition: .4s;
             }
@@ -262,7 +240,7 @@
         &-call {
             display: flex;
             flex-direction: column;
-            color: $dark-gray;
+            color: $black;
             gap: 4px;
             font-size: 18px;
             margin-top: 74px;
@@ -275,7 +253,7 @@
 
             &-number {
                 font-size: 32px;
-                color: $orange;
+                color: $black;
                 font-weight: 700;
             }
         }
@@ -298,7 +276,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             opacity: 0;
             pointer-events: none;
-            border: 2px solid $orange;
+            border: 2px solid $black;
             padding: 22px;
             z-index: 901;
             overflow: unset;
@@ -374,7 +352,7 @@
             position: absolute;
             bottom: -1px;
             left: 0;
-            background-color: $orange;
+            background-color: $black;
             opacity: 0;
             transition: .4s;
         }
@@ -415,7 +393,7 @@
 
             input {
                 color: #808080;
-                border: 2px solid $orange;
+                border: 2px solid $black;
                 padding: 20px 22px;
                 font-size: 16px;
 
@@ -432,16 +410,15 @@
 
     &__button {
         padding: 20px 40px;
-        border: 2px solid $orange;
+        border: 2px solid $gold;
         font-weight: 700;
-        color: $dark-gray;
+        color: $gold;
         text-align: center;
-        margin-left: 14px;
         transition: .4s;
         text-transform: lowercase;
 
         &:hover {
-            background-color: rgba($orange, .2);
+            background-color: rgba($gold, .2);
         }
     }
 
@@ -456,7 +433,6 @@
         position: relative;
         z-index: 902;
 
-
         &.active {}
 
         @media screen and (min-width: 1024px) {
@@ -468,7 +444,7 @@
 
             &::after,
             &::before {
-                background-color: $orange;
+                background-color: $gold;
                 transition-delay: 0s, 0.2s;
             }
 
@@ -486,9 +462,9 @@
 
         span {
             display: block;
-            background-color: $orange;
+            background-color: $gold;
             width: 32px;
-            height: 4px;
+            height: 3px;
             margin-top: -1px;
             font: 0 / 0;
             text-shadow: none;
@@ -519,7 +495,7 @@
             &::after {
                 bottom: -10px;
                 transition-property: bottom, transform;
-                width: 22px;
+                width: 32px;
             }
         }
     }
@@ -527,7 +503,7 @@
     &__call {
         display: flex;
         flex-direction: column;
-        color: $dark-gray;
+        color: $black;
         gap: 4px;
         margin: 20px 10px 20px 0;
         padding: 0 24px 0 0;
@@ -535,7 +511,7 @@
 
         &-number {
             font-size: 24px;
-            color: $orange;
+            color: $black;
             font-weight: 700;
             text-align: right;
         }

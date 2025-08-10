@@ -59,7 +59,7 @@
         &-item {
             padding-right: 16px;
             margin-right: 16px;
-            border-right: 1px solid $orange;
+            border-right: 1px solid $black;
 
             @media screen and (max-width: 1023px) {
                 border-right: 0;
@@ -73,7 +73,7 @@
                     content: '';
                     width: 24px;
                     height: 2px;
-                    background-color: $orange;
+                    background-color: $black;
                     position: absolute;
                     left: 50%;
                     bottom: -24px;
