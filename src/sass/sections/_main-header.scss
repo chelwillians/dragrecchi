@@ -135,7 +135,7 @@
             }
 
             a {
-                color: $gold;
+                color: $soft-gold;
                 line-height: 1.2;
                 height: 100%;
                 display: flex;
@@ -410,15 +410,15 @@
 
     &__button {
         padding: 20px 40px;
-        border: 2px solid $gold;
+        border: 2px solid $soft-gold;
         font-weight: 700;
-        color: $gold;
+        color: $soft-gold;
         text-align: center;
         transition: .4s;
         text-transform: lowercase;
 
         &:hover {
-            background-color: rgba($gold, .2);
+            background-color: rgba($soft-gold, .2);
         }
     }
 
@@ -444,7 +444,7 @@
 
             &::after,
             &::before {
-                background-color: $gold;
+                background-color: $soft-gold;
                 transition-delay: 0s, 0.2s;
             }
 
@@ -462,7 +462,7 @@
 
         span {
             display: block;
-            background-color: $gold;
+            background-color: $soft-gold;
             width: 32px;
             height: 3px;
             margin-top: -1px;
