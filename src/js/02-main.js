@@ -1,4 +1,4 @@
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
     const mainHeader = document.querySelector('.main-header');
     const hamburguerItem = document.querySelector('.main-header__hamburguer');
     // const headerMenus = document.querySelector('.main-header__menus--mobile');
@@ -10,4 +10,23 @@ window.addEventListener('load', function () {
         document.body.classList.toggle('no-scroll');
 
     })
+})
+
+window.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper(".main-banner__list", {
+        rewind: true,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.main-banner__next',
+            prevEl: '.main-banner__prev',
+        },
+        pagination: {
+            el: '.main-banner__pagination',
+            clickable: true,
+        },
+    });
 })

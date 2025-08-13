@@ -2,8 +2,15 @@
     $header: &;
     z-index: 999;
     position: relative;
-    background: $brown;
     transition: .4s;
+    height: 110px;
+    width: 100%;
+
+    &--float{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 
     &.is-fixed {
         position: fixed;
@@ -103,13 +110,6 @@
         }
 
         &-button {
-            padding: 20px 40px;
-            border: 2px solid $black;
-            font-weight: 700;
-            color: $black;
-            text-align: center;
-            transition: .4s;
-            text-transform: lowercase;
             box-sizing: border-box;
             display: block;
             margin-top: 32px;
@@ -405,20 +405,6 @@
                     outline: none;
                 }
             }
-        }
-    }
-
-    &__button {
-        padding: 20px 40px;
-        border: 2px solid $soft-gold;
-        font-weight: 700;
-        color: $soft-gold;
-        text-align: center;
-        transition: .4s;
-        text-transform: lowercase;
-
-        &:hover {
-            background-color: rgba($soft-gold, .2);
         }
     }
 

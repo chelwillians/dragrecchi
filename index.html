@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <header class="main-header">
+    <header class="main-header main-header--float">
         <div class="container wrap">
             <a href="#" class="main-header__logo">
-                <img src="./dist/images/logo-min.png" alt="Logo">
+                <img src="./dist/images/logo.svg" alt="Logo">
             </a>
             <nav class="main-header__menu">
                 <ul class="main-header__menu-content">
@@ -25,10 +25,10 @@
                     <li class="main-header__menu-item"><a href="#">Blog</a></li>
                     <li class="main-header__menu-item"><a href="#">Contato</a></li>
                 </ul>
-                <a href="#" class="main-header__menu-button">Agendar</a>
+                <a href="#" class="main-header__menu-button btn btn--default">Agendar</a>
             </nav>
             <div class="main-header__actions">
-                <a href="#" class="main-header__button">Agendar</a>
+                <a href="#" class="main-header__button btn btn--default">Agendar</a>
             </div>
             <div class="main-header__hamburguer">
                 <span></span>
@@ -37,8 +37,30 @@
     </header>
 
     <section class="main-banner">
-        <div class="container wrap">
-            
+        <h1 class="hide-title">Dra. Camille Grecchi</h1>
+        <div class="main-banner__list swiper">
+            <div class="swiper-wrapper">
+                <div class="main-banner__item swiper-slide">
+                    <img src="./dist/images/banner.jpg" class="main-banner__item-image" alt="">
+                    <div class="container wrap">
+                        <span class="main-banner__item-subtitle">1Lorem Ipsum</span>
+                        <span class="main-banner__item-title">1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mauris ac turpis ultrices efficitur.</span>
+                        <div class="main-banner__item-button-area">
+                            <a href="#" class="main-banner__item-button btn btn--default">Agendar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-banner__item swiper-slide">
+                    <img src="./dist/images/banner.jpg" class="main-banner__item-image" alt="">
+                    <div class="container wrap">
+                        <span class="main-banner__item-subtitle">2Lorem Ipsum</span>
+                        <span class="main-banner__item-title">2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mauris ac turpis ultrices efficitur.</span>
+                        <div class="main-banner__item-button-area">
+                            <a href="#" class="main-banner__item-button btn btn--default">Agendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -105,3 +105,20 @@ form {
     background: #f1c40f !important;
   }
 }
+
+.btn {
+  &--default {
+    display: inline-block;
+    padding: 16px 40px;
+    border: 2px solid $soft-gold;
+    font-weight: 700;
+    color: $soft-gold;
+    text-align: center;
+    transition: .4s;
+    text-transform: lowercase;
+
+    &:hover {
+      background-color: rgba($soft-gold, .2);
+    }
+  }
+}
