@@ -9,13 +9,7 @@
         z-index: 50;
     }
 
-    &__list {
-        padding-bottom: 56px;
-
-        @media screen and (min-width: 1024px) {
-            padding-bottom: 0px;
-        }
-    }
+    &__list {}
 
     &__item {
         position: relative;
