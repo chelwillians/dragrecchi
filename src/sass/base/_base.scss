@@ -107,15 +107,30 @@ form {
 }
 
 .btn {
+  display: inline-block;
+  padding: 16px 40px;
+  font-weight: 700;
+  color: $soft-gold;
+
   &--default {
-    display: inline-block;
-    padding: 16px 40px;
     border: 2px solid $soft-gold;
-    font-weight: 700;
-    color: $soft-gold;
     text-align: center;
     transition: .4s;
     text-transform: lowercase;
+
+    &:hover {
+      background-color: rgba($soft-gold, .2);
+    }
+  }
+
+  &--gold {
+    border: 2px solid $gold;
+    background: $gold;
+    text-align: center;
+    transition: .4s;
+    text-transform: lowercase;
+    color: $white;
+    border-radius: 2px;
 
     &:hover {
       background-color: rgba($soft-gold, .2);
