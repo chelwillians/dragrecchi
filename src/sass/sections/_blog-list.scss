@@ -1,0 +1,64 @@
+.blog-list {
+    $s: &;
+    background-color: rgba($soft-gold, .3);
+    padding: 32px 0;
+
+    @media screen and (min-width: 1024px) {
+        padding: 64px 0;
+    }
+
+    &__header {
+        @media screen and (min-width: 1024px) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #{$s}__button {
+            display: none;
+
+            @media screen and (min-width: 1024px) {
+                display: inline-block;
+            }
+        }
+    }
+
+    &__title{
+        font-weight: 400;
+
+        strong{
+            font-weight: 800;
+        }
+    }
+
+    &__list {
+        margin-top: 32px;
+        display: grid;
+        gap: 24px;
+
+        @media screen and (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        &-title {
+            font-size: 20px;
+            color: $black;
+        }
+    }
+
+    &__button-area {
+        margin-top: 32px;
+        display: flex;
+        justify-content: center;
+
+        @media screen and (min-width: 1024px) {
+            display: none;
+        }
+    }
+}
