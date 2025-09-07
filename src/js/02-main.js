@@ -30,3 +30,22 @@ window.addEventListener('DOMContentLoaded', function () {
         },
     });
 })
+
+window.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper(".image-text__slider", {
+        rewind: true,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+        // navigation: {
+        //     nextEl: '.main-banner__next',
+        //     prevEl: '.main-banner__prev',
+        // },
+        pagination: {
+            // el: '.main-banner__pagination',
+            clickable: true,
+        },
+    });
+})
