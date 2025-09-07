@@ -1,0 +1,190 @@
+.internal-banner {
+    position: relative;
+    background-color: #111;
+
+    .wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        z-index: 50;
+    }
+
+    &__list {}
+
+    &__item {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 120px;
+
+        @media screen and (min-width: 1024px) {
+            padding-top: 0;
+            height: 70vh;
+            min-height: unset;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($black, .4);
+            z-index: 45;
+        }
+
+        &-image {
+            height: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            object-fit: cover;
+
+            &--desk {
+                display: none;
+
+                @media screen and (min-width: 768px) {
+                    display: block;
+                }
+            }
+
+            &--mobile {
+                @media screen and (min-width: 768px) {
+                    display: none;
+                }
+            }
+        }
+
+        &-subtitle {
+            font-size: 18px;
+            font-weight: 700;
+            max-width: 734px;
+            color: $beige;
+        }
+
+        &-title {
+            font-size: 32px;
+            font-weight: 700;
+            max-width: 734px;
+            line-height: 1.4;
+            color: $beige;
+
+            @media screen and (min-width: 1024px) {
+                font-size: 40px;
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            flex-direction: row;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        max-width: 414px;
+        margin-top: 32px;
+    }
+
+    &__button {
+        margin-top: 48px;
+        padding: 18px 16px;
+        border: 2px solid $brown;
+        font-weight: 700;
+        font-size: 18px;
+        color: $brown;
+        text-align: center;
+        transition: .4s;
+        text-transform: lowercase;
+        line-height: 1.15;
+        display: inline-block;
+        width: 100%;
+
+        @media screen and (min-width: 1024px) {
+            width: auto;
+        }
+
+        &:hover {
+            background-color: rgba($brown, .2);
+        }
+    }
+
+    &__float-icon {
+        position: absolute;
+        right: -44px;
+        top: 180px;
+        animation: spinner 16s linear infinite;
+        z-index: 100;
+        width: 145px;
+        pointer-events: none;
+
+        @media screen and (min-width: 1024px) {
+            top: unset;
+            right: 0;
+            bottom: -145px;
+            width: unset;
+        }
+    }
+
+    &__navigation {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 600;
+        transform: translateX(25%);
+
+        @media screen and (min-width: 1024px) {
+            left: 0;
+            transform: unset;
+        }
+    }
+
+    &__prev {
+        position: absolute;
+        bottom: 3px;
+        left: 5px;
+
+        width: 10px;
+        height: 10px;
+
+        border-left: 2px solid #FF8400;
+        border-top: 2px solid #FF8400;
+        transform: rotate(-45deg);
+
+        cursor: pointer;
+    }
+
+    &__next {
+        position: absolute;
+        bottom: 3px;
+        right: 5px;
+
+        width: 10px;
+        height: 10px;
+
+        border-left: 2px solid #FF8400;
+        border-top: 2px solid #FF8400;
+        transform: rotate(135deg);
+
+        cursor: pointer;
+    }
+
+    &__pagination {
+        padding: 0 32px;
+
+        .swiper-pagination-bullet {
+            width: 18px;
+            height: 8px;
+            background-color: #D1D1D2;
+            border-radius: 0;
+            transition: .4s;
+
+            &-active {
+                background-color: $gold;
+                width: 40px;
+            }
+        }
+    }
+}

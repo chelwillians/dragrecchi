@@ -32,6 +32,25 @@ window.addEventListener('DOMContentLoaded', function () {
 })
 
 window.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper(".internal-banner__list", {
+        rewind: true,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.internal-banner__next',
+            prevEl: '.internal-banner__prev',
+        },
+        pagination: {
+            el: '.internal-banner__pagination',
+            clickable: true,
+        },
+    });
+})
+
+window.addEventListener('DOMContentLoaded', function () {
     const swiper = new Swiper(".image-text__slider", {
         rewind: true,
         slidesPerView: 1,
