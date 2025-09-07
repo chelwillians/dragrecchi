@@ -1,0 +1,147 @@
+.faq {
+    padding: 80px 0;
+
+    @media screen and (max-width: 1023px) {
+        padding: 48px 0 36px;
+    }
+
+    .wrap {
+        padding: 0 56px;
+
+        @media screen and (max-width: 1023px) {
+            padding: 0 24px;
+        }
+    }
+
+    &__header {
+        max-width: 768px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    &__pre-title {
+        display: block;
+        font-weight: 300;
+        color: $gold-3;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-align: center;
+    }
+
+    &__list {
+        max-width: 826px;
+        margin: 72px auto 0;
+    }
+
+    &__item {
+        $item: &;
+        border-bottom: 1px solid $light-gray;
+        margin-bottom: 32px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &.on {
+            display: block;
+        }
+
+        &.off {
+            display: none;
+        }
+
+        &--question {
+            font-size: 20px;
+            position: relative;
+            font-weight: 500;
+            color: $gold-3;
+            display: flex;
+            align-items: center;
+            padding-bottom: 36px;
+            transition: .4s;
+            line-height: 1.4;
+            padding-right: 34px;
+            cursor: pointer;
+
+            #{$item}.active & {
+                padding-bottom: 0px;
+                color: $gold-3;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                display: inline-block;
+                -webkit-mask: $plus no-repeat;
+                mask: $plus no-repeat;
+                background: $gold-3;
+                width: 24px;
+                height: 24px;
+                mask-size: 100%;
+                transition: .4s;
+
+                #{$item}.active & {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+
+
+        &--answer {
+            color: $gold-3;
+            font-size: 18px;
+            line-height: 1.4;
+            padding: 0;
+            max-height: 0;
+            transition: .4s;
+            overflow: hidden;
+            // padding: 16px 0;
+            opacity: 0;
+
+            #{$item}.active & {
+                max-height: 1610px;
+                padding: 16px 0;
+                opacity: 1;
+            }
+
+            p {
+                margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &__button-area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 56px;
+    }
+
+    &__button {
+        padding: 18px 16px;
+        border: 2px solid $gold-2;
+        font-weight: 700;
+        font-size: 18px;
+        color: $gold-2;
+        text-align: center;
+        transition: .4s;
+        text-transform: lowercase;
+        line-height: 1.15;
+        display: inline-block;
+
+        @media screen and (max-width: 1023px) {
+            width: 100%;
+        }
+
+        &:hover {
+            background-color: rgba($gold-2, .2);
+        }
+    }
+}
