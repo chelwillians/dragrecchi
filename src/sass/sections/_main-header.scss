@@ -12,6 +12,10 @@
         top: 0;
     }
 
+    &--background{
+        background-color: $brown;
+    }
+
     &.is-fixed {
         position: fixed;
         top: 0;
