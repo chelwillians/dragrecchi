@@ -45,7 +45,6 @@ add_filter('comments_template', '__return_empty_string');
 // disable api
 add_filter('xmlrpc_enabled', '__return_false');
 
-
 // Functions
 function hide_editor()
 {
@@ -63,6 +62,7 @@ function hide_editor()
     // Lista de templates que ocultam o editor
     $templates_to_hide_editor = [
         'index.php',
+        'about.php',
     ];
 
     // Remove o suporte ao editor para templates especificados
@@ -295,7 +295,7 @@ function cmb2_h1_title()
         'id'            => 'cmb2_h1',
         'title'         => __('H1', 'cmb2'),
         'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => ['index.php']),
+        'show_on' => array('key' => 'page-template', 'value' => ['index.php', 'about.php']),
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
@@ -315,7 +315,7 @@ function cmb2_main_banner()
         'id'            => 'cmb2_banner',
         'title'         => __('Seção - Banner', 'cmb2'),
         'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
+        'show_on' => array('key' => 'page-template', 'value' => ['index.php', 'about.php']),
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
@@ -767,3 +767,232 @@ function cmb2_contact()
     ));
 }
 add_action('cmb2_admin_init', 'cmb2_contact');
+
+function cmb2_text_image()
+{
+    $cmb_text_image = new_cmb2_box(array(
+        'id'            => 'cmb2_text_image',
+        'title'         => __('Seção - Imagem e Texto', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => 'about.php'),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_text_image->add_field(array(
+        'id'   => 'text_image_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_text_image->add_field(array(
+        'id'   => 'text_image_title',
+        'name' => 'Título ',
+        'type' => 'text',
+    ));
+
+    $cmb_text_image->add_field(array(
+        'id'   => 'text_image_desc',
+        'name' => 'Descrição',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+
+    // $cmb_text_image->add_field(array(
+    //     'id'   => 'text_image_link',
+    //     'name' => 'Link botão',
+    //     'type' => 'text',
+    // ));
+
+    // $cmb_text_image->add_field(array(
+    //     'id'   => 'text_image_text_button',
+    //     'name' => 'Texto botão',
+    //     'type' => 'text',
+    // ));
+
+    $cmb_text_image->add_field(array(
+        'id'   => 'text_image_image',
+        'name' => 'Imagem',
+        'desc'    => 'Resolução recomendada de 600x460',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar imagem'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_text_image');
+
+function cmb2_video()
+{
+    $cmb_video = new_cmb2_box(array(
+        'id'            => 'cmb2_video',
+        'title'         => __('Seção - Vídeo', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => 'about.php'),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_video->add_field(array(
+        'id'   => 'video_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_video->add_field(array(
+        'id'   => 'video_title',
+        'name' => 'Título ',
+        'type' => 'text',
+    ));
+
+    $cmb_video->add_field(array(
+        'id'   => 'video_iframe',
+        'name' => 'Iframe do vídeo',
+        'type'    => 'textarea',
+        'sanitization_cb' => 'prefix_sanitize_iframe'
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_video');
+
+function cmb2_text_image_2()
+{
+    $cmb_text_image_2 = new_cmb2_box(array(
+        'id'            => 'cmb2_text_image_2',
+        'title'         => __('Seção - Imagem e Texto', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => 'about.php'),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_text_image_2->add_field(array(
+        'id'   => 'text_image_2_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_text_image_2->add_field(array(
+        'id'   => 'text_image_2_title',
+        'name' => 'Título ',
+        'type' => 'text',
+    ));
+
+    $cmb_text_image_2->add_field(array(
+        'id'   => 'text_image_2_desc',
+        'name' => 'Descrição',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+
+    // $cmb_text_image_2->add_field(array(
+    //     'id'   => 'text_image_2_link',
+    //     'name' => 'Link botão',
+    //     'type' => 'text',
+    // ));
+
+    // $cmb_text_image_2->add_field(array(
+    //     'id'   => 'text_image_2_text_button',
+    //     'name' => 'Texto botão',
+    //     'type' => 'text',
+    // ));
+
+    $cmb_text_image_2->add_field(array(
+        'id'   => 'text_image_2_image',
+        'name' => 'Imagem',
+        'desc'    => 'Resolução recomendada de 600x460',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar imagem'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_text_image_2');
+
+function cmb2_faq()
+{
+    $cmb_faq = new_cmb2_box(array(
+        'id'            => 'cmb2_faq',
+        'title'         => __('Seção - FAQ', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => 'about.php'),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_faq->add_field(array(
+        'id'   => 'faq_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_faq->add_field(array(
+        'id'   => 'faq_title',
+        'name' => 'Título ',
+        'type' => 'text',
+    ));
+
+    $cmb_faq->add_field(array(
+        'id'   => 'faq_desc',
+        'name' => 'Descrição',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+
+    $faq = $cmb_faq->add_field(array(
+        'id'          => 'faq_list',
+        'type'        => 'group',
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'       => __('FAQ Item {#}', 'cmb2'),
+            'add_button'        => __('Adicionar', 'cmb2'),
+            'remove_button'     => __('Remover', 'cmb2'),
+            'sortable'          => true,
+            'closed'         => true,
+            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+        ),
+    ));
+
+    $cmb_faq->add_group_field($faq, array(
+        'id'      => 'pergunta',
+        'name' => 'Pergunta',
+        'type'    => 'text',
+    ));
+
+    $cmb_faq->add_group_field($faq, array(
+        'id'      => 'resposta',
+        'name' => 'Resposta',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_faq');
