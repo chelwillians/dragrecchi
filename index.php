@@ -5,218 +5,240 @@
 */
 
 get_header() ?>
-<section class="main-banner">
-    <h1 class="hide-title">Dra. Camille Grecchi</h1>
-    <div class="main-banner__list swiper">
-        <div class="swiper-wrapper">
-            <div class="main-banner__item swiper-slide">
-                <img src="<?= get_template_directory_uri() ?>/dist/images/banner.jpg" class="main-banner__item-image main-banner__item-image--desk" alt="">
-                <img src="<?= get_template_directory_uri() ?>/dist/images/banner-mobile.jpg" class="main-banner__item-image main-banner__item-image--mobile" alt="">
-                <div class="container wrap">
-                    <span class="main-banner__item-subtitle">1Lorem Ipsum</span>
-                    <span class="main-banner__item-title">1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mauris ac turpis ultrices efficitur.</span>
-                    <div class="main-banner__item-button-area">
-                        <a href="#" class="main-banner__item-button btn btn--default">Agendar</a>
+
+<?php if (!empty(get_field_cmb2('banner_show')) && !empty(get_field_cmb2('sliders'))): ?>
+    <section class="main-banner">
+        <h1 class="hide-title"><?= !empty(get_field_cmb2('h1_content')) ? get_field_cmb2('h1_content') : get_the_title() ?></h1>
+        <div class="main-banner__list swiper">
+            <div class="swiper-wrapper">
+                <?php foreach (get_field_cmb2('sliders') as $index => $item): ?>
+                    <div class="main-banner__item swiper-slide">
+                        <?php if (!empty($item['image_desk'])): ?>
+                            <img src="<?= $item['image_desk'] ?>" class="main-banner__item-image main-banner__item-image--desk" alt="<?= !empty(get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>">
+                        <?php endif; ?>
+                        <?php if (!empty($item['image_mobile'])): ?>
+                            <img src="<?= $item['image_mobile'] ?>" class="main-banner__item-image main-banner__item-image--mobile" alt="<?= !empty(get_post_meta($item['image_mobile_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['image_mobile_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>">
+                        <?php endif; ?>
+                        <div class="container wrap">
+                            <?php if (!empty($item['pretitle'])): ?>
+                                <span class="main-banner__item-subtitle"><?= $item['pretitle'] ?></span>
+                            <?php endif; ?>
+                            <?php if (!empty($item['title'])): ?>
+                                <span class="main-banner__item-title"><?= $item['title'] ?></span>
+                            <?php endif; ?>
+                            <?php if (!empty($item['link_btn'])): ?>
+                                <div class="main-banner__item-button-area">
+                                    <a href="<?= $item['link_btn'] ?>" class="main-banner__item-button btn btn--default"><?= !empty($item['text_btn']) ? $item['text_btn'] : "Agendar";  ?></a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <div class="main-banner__item swiper-slide">
-                <img src="<?= get_template_directory_uri() ?>/dist/images/banner.jpg" class="main-banner__item-image main-banner__item-image--desk" alt="">
-                <img src="<?= get_template_directory_uri() ?>/dist/images/banner-mobile.jpg" class="main-banner__item-image main-banner__item-image--mobile" alt="">
-                <div class="container wrap">
-                    <span class="main-banner__item-subtitle">2Lorem Ipsum</span>
-                    <span class="main-banner__item-title">2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum mauris ac turpis ultrices efficitur.</span>
-                    <div class="main-banner__item-button-area">
-                        <a href="#" class="main-banner__item-button btn btn--default">Agendar</a>
+        </div>
+    </section>
+<?php endif; ?>
+
+<?php if (!empty(get_field_cmb2('about_show'))): ?>
+    <section class="about">
+        <div class="container wrap">
+            <div class="about__left">
+                <?php if (!empty(get_field_cmb2('about_title'))): ?>
+                    <h2 class="about__title title"><?= get_field_cmb2('about_title') ?></h2>
+                <?php endif; ?>
+                <?php if (!empty(get_field_cmb2('about_desc'))): ?>
+                    <div class="about__desc">
+                        <?= wpautop(get_field_cmb2('about_desc')) ?>
                     </div>
+                <?php endif; ?>
+            </div>
+            <img src="<?= !empty(get_field_cmb2('about_image')) ? get_field_cmb2('about_image') : get_template_directory_uri() . '/dist/images/nose.jpg' ?>" alt="<?= !empty(get_post_meta(get_field_cmb2('about_image_id'), '_wp_attachment_image_alt', TRUE)) ? get_post_meta(get_field_cmb2('about_image_id'), '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>" class="about__image">
+        </div>
+    </section>
+<?php endif; ?>
+
+<?php
+$args_blog = array(
+    'post_type'      => 'procedimentos',
+    'posts_per_page' => -1,
+    'post_status'    => 'publish',
+);
+query_posts($args_blog);
+
+if (have_posts()) :
+?>
+    <?php if (!empty(get_field_cmb2('procedures_show'))): ?>
+        <section class="procedures">
+            <div class="container wrap">
+                <div class="procedures__call">
+                    <?php if (!empty(get_field_cmb2('procedures_title'))): ?>
+                        <h2 class="procedures__title title"><?= get_field_cmb2('procedures_title') ?></h2>
+                    <?php endif; ?>
+                    <?php if (!empty(get_field_cmb2('procedures_desc'))): ?>
+                        <div class="procedures__desc">
+                            <?= wpautop(get_field_cmb2('procedures_desc')) ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
+                <?php $i = 0;
+                $duration = 400;
+                while (have_posts()) :
+                    the_post();
+                ?>
+                    <a href="<?= get_the_permalink() ?>" title="<?= "Procedimento: " .  get_the_title() ?>" class="procedures__item">
+                        <img src="<?= has_post_thumbnail() ? get_the_post_thumbnail_url('', 'medium_large') : "https://placehold.co/420" ?>" alt="<?= has_post_thumbnail() ? get_alt(get_post_thumbnail_id()) : "Imagem do post " . get_the_title() ?>" class="procedures__item-image">
+                    </a>
+                <?php $i++;
+                    $duration += 200;
+                endwhile; ?>
+                <?php wp_reset_query(); ?>
+                <?php if (!empty(get_field_cmb2('procedures_link_btn'))): ?>
+                    <div class="procedures__button-area">
+                        <a href="<?= get_field_cmb2('procedures_link_btn') ?>" class="procedures__button btn btn--gold"><?= !empty(get_field_cmb2('procedures_text_btn')) ? get_field_cmb2('procedures_text_btn') : "Ver todos" ?></a>
+                    </div>
+                <?php endif; ?>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+    <?php endif; ?>
+<?php endif; ?>
 
-<section class="about">
-    <div class="container wrap">
-        <div class="about__left">
-            <h2 class="about__title title">Lorem ipsum dolor sit amet</h2>
-            <div class="about__desc">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue. Vestibulum ac leo a ipsum fermentum faucibus vel nec lacus. Maecenas nec purus ac purus tincidunt porta nec non leo. Proin ullamcorper ac diam nec commodo. Nulla consectetur sollicitudin orci ac viverra. Suspendisse et justo sit amet nisl suscipit volutpat lobortis sit amet ligula. Morbi ut congue mauris, eget imperdiet urna. Praesent vestibulum sapien eu ante venenatis, id feugiat ipsum rhoncus.</p>
-                <p>In auctor odio ut nulla blandit, ac congue risus aliquet. Aliquam aliquet congue ante id elementum. Ut eu tortor vel magna hendrerit venenatis et sed dui. Etiam at viverra elit, nec pellentesque augue. Etiam ac lacus viverra, semper est ut, iaculis purus. Etiam lobortis justo neque, sed efficitur tellus egestas ac. Etiam dignissim, turpis id semper ultrices, quam nibh molestie ligula, non finibus eros dui id arcu. Morbi fermentum consequat urna, et feugiat urna porta non. Aliquam vehicula, nulla id cursus dapibus, enim ex scelerisque risus, sed semper erat magna id enim. Donec quis ligula justo. Phasellus blandit dolor at urna cursus iaculis. Cras in urna id massa maximus scelerisque nec vel magna.</p>
+<?php if (!empty(get_field_cmb2('text_image_list_show'))): ?>
+    <section class="image-text">
+        <div class="container wrap">
+            <img src="<?= !empty(get_field_cmb2('text_image_list_image')) ? get_field_cmb2('text_image_list_image') : get_template_directory_uri() . '/dist/images/nose.jpg' ?>" alt="<?= !empty(get_post_meta(get_field_cmb2('text_image_list_image_id'), '_wp_attachment_image_alt', TRUE)) ? get_post_meta(get_field_cmb2('text_image_list_image_id'), '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>" class="image-text__image">
+            <div class="image-text__content">
+                <?php if (!empty(get_field_cmb2('text_image_list_title'))): ?>
+                    <h2 class="image-text__title title"><?= get_field_cmb2('text_image_list_title') ?></h2>
+                <?php endif; ?>
+                <?php if (!empty(get_field_cmb2('text_image_list_desc'))): ?>
+                    <div class="image-text__desc">
+                        <?= wpautop(get_field_cmb2('text_image_list_desc')) ?>
+                    </div>
+                <?php endif; ?>
+                <ul class="image-text__bullets">
+                    <?php foreach (get_field_cmb2('list') as $index => $item): ?>
+                        <li class="image-text__bullets-item">
+                            <?php if (!empty($item['icon'])): ?>
+                                <img class="image-text__bullets-icon" src="<?= $item['icon'] ?>" alt="<?= !empty(get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>" />
+                            <?php endif; ?>
+                            <?php if (!empty($item['text'])): ?>
+                                <span><?= $item['text'] ?></span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
-        <img src="<?= get_template_directory_uri() ?>/dist/images/nose.jpg" alt="" class="about__image">
-    </div>
-</section>
+    </section>
+<?php endif; ?>
 
-<section class="procedures">
-    <div class="container wrap">
-        <div class="procedures__call">
-            <h2 class="procedures__title title">Procedimentos</h2>
-            <div class="procedures__desc">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue.</p>
+<?php if (!empty(get_field_cmb2('testmonials_show'))): ?>
+    <section class="testimonials">
+        <div class="container wrap">
+            <div class="testimonials__call">
+                <?php if (!empty(get_field_cmb2('testmonials_title'))): ?>
+                    <h2 class="testimonials__title title"><?= get_field_cmb2('testmonials_title') ?></h2>
+                <?php endif; ?>
+                <?php if (!empty(get_field_cmb2('testmonials_desc'))): ?>
+                    <div class="testimonials__desc">
+                        <?= wpautop(get_field_cmb2('testmonials_desc')) ?>
+                    </div>
+                <?php endif; ?>
             </div>
-        </div>
-        <a href="#" class="procedures__item">
-            <img src="https://placehold.co/420" alt="" class="procedures__item-image">
-        </a>
-        <a href="#" class="procedures__item">
-            <img src="https://placehold.co/420" alt="" class="procedures__item-image">
-        </a>
-        <a href="#" class="procedures__item">
-            <img src="https://placehold.co/420" alt="" class="procedures__item-image">
-        </a>
-        <a href="#" class="procedures__item">
-            <img src="https://placehold.co/420" alt="" class="procedures__item-image">
-        </a>
-        <a href="#" class="procedures__item">
-            <img src="https://placehold.co/420" alt="" class="procedures__item-image">
-        </a>
-        <div class="procedures__button-area">
-            <a href="#" class="procedures__button btn btn--gold">Ver todos</a>
-        </div>
-    </div>
-</section>
+            <div class="testimonials__list">
+                <?php foreach (get_field_cmb2('testmonials') as $index => $item): ?>
+                    <?php
+                    // Supondo que $item contenha a URL do vídeo
+                    $video_url = $item['video'];
+                    $ext = pathinfo($video_url, PATHINFO_EXTENSION); // pega a extensão (mp4, webm, etc.)
+                    $type = "video/" . strtolower($ext); // gera o type automaticamente
+                    ?>
 
-<section class="image-text">
-    <div class="container wrap">
-        <img src="<?= get_template_directory_uri() ?>/dist/images/nose.jpg" alt="" class="image-text__image">
-        <div class="image-text__content">
-            <h2 class="image-text__title title">Lorem ipsum dolor sit amet</h2>
-            <div class="image-text__desc">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue. Vestibulum ac leo a ipsum fermentum faucibus vel nec lacus. Maecenas nec purus ac purus tincidunt porta nec non leo. Proin ullamcorper ac diam nec commodo. Nulla consectetur sollicitudin orci ac viverra. Suspendisse et justo sit amet nisl suscipit volutpat lobortis sit amet ligula. Morbi ut congue mauris, eget imperdiet urna. Praesent vestibulum sapien eu ante venenatis, id feugiat ipsum rhoncus.</p>
+                    <div class="testimonials__item">
+                        <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto">
+                            <source src="<?= esc_url($video_url) ?>" type="<?= esc_attr($type) ?>">
+                            Seu navegador não suporta vídeos HTML5.
+                        </video>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <ul class="image-text__bullets">
-                <li class="image-text__bullets-item">
-                    <img class="image-text__bullets-icon" src="https://placehold.co/24" />
-                    <span>Lorem ipsum dolor sit ametet</span>
-                </li>
-                <li class="image-text__bullets-item">
-                    <img class="image-text__bullets-icon" src="https://placehold.co/24" />
-                    <span>Lorem ipsum dolor sit ametet</span>
-                </li>
-                <li class="image-text__bullets-item">
-                    <img class="image-text__bullets-icon" src="https://placehold.co/24" />
-                    <span>Lorem ipsum dolor sit ametet</span>
-                </li>
-                <li class="image-text__bullets-item">
-                    <img class="image-text__bullets-icon" src="https://placehold.co/24" />
-                    <span>Lorem ipsum dolor sit ametet</span>
-                </li>
-            </ul>
         </div>
-    </div>
-</section>
+    </section>
+<?php endif; ?>
 
-<section class="testimonials">
-    <div class="container wrap">
-        <div class="testimonials__call">
-            <h2 class="testimonials__title title">Depoimentos</h2>
-            <div class="testimonials__desc">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue.</p>
-            </div>
-        </div>
-        <div class="testimonials__list">
-            <div class="testimonials__item">
-                <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto" poster="<?= get_template_directory_uri() ?>/dist/videos/depoimento.jpg">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.mp4" type="video/mp4">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.webm" type="video/webm">
-                    Seu navegador não suporta vídeos HTML5.
-                </video>
-            </div>
-            <div class="testimonials__item">
-                <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto" poster="<?= get_template_directory_uri() ?>/dist/videos/depoimento.jpg">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.mp4" type="video/mp4">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.webm" type="video/webm">
-                    Seu navegador não suporta vídeos HTML5.
-                </video>
-            </div>
-            <div class="testimonials__item">
-                <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto" poster="<?= get_template_directory_uri() ?>/dist/videos/depoimento.jpg">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.mp4" type="video/mp4">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.webm" type="video/webm">
-                    Seu navegador não suporta vídeos HTML5.
-                </video>
-            </div>
-            <div class="testimonials__item">
-                <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto" poster="<?= get_template_directory_uri() ?>/dist/videos/depoimento.jpg">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.mp4" type="video/mp4">
-                    <source src="<?= get_template_directory_uri() ?>/dist/videos/depoimento.webm" type="video/webm">
-                    Seu navegador não suporta vídeos HTML5.
-                </video>
-            </div>
-        </div>
-    </div>
-</section>
+<?php
+$args_blog = array(
+    'post_type'      => 'post',
+    'posts_per_page' => -1,
+    'post_status'    => 'publish',
+);
+query_posts($args_blog);
 
-<section class="blog-list">
-    <div class="container wrap">
-        <div class="blog-list__header">
-            <h2 class="blog-list__title title"><strong>Blog | </strong>Fique por dentro</h2>
-            <a href="#" class="blog-list__button btn btn--gold">Ver todos</a>
-        </div>
+if (have_posts()) :
+?>
+    <section class="blog-list">
+        <div class="container wrap">
+            <div class="blog-list__header">
+                <h2 class="blog-list__title title"><strong>Blog | </strong>Fique por dentro</h2>
+                <a href="<?= get_home_url() . '/blog' ?>" class="blog-list__button btn btn--gold">Ver todos</a>
+            </div>
+            <div class="blog-list__list">
+                <?php $i = 0;
+                $duration = 400;
+                while (have_posts()) :
+                    the_post();
+                ?>
+                    <div class="blog-list__item">
+                        <a href="<?= get_permalink() ?>" class="">
+                            <img src="<?= has_post_thumbnail() ? get_the_post_thumbnail_url('', 'medium_large') : "https://placehold.co/506x320" ?>" alt="<?= has_post_thumbnail() ? get_alt(get_post_thumbnail_id()) : "Imagem do post " . get_the_title() ?>" class="blog-list__item-img">
+                        </a>
+                        <a href="<?= get_permalink() ?>">
+                            <h3 class="blog-list__item-title title"><?= get_the_title() ?></h3>
+                        </a>
+                    </div>
+                <?php $i++;
+                    $duration += 200;
+                endwhile; ?>
+                <?php wp_reset_query(); ?>
+            </div>
 
-        <div class="blog-list__list">
-            <div class="blog-list__item">
-                <a href="#" class="">
-                    <img src="https://placehold.co/506x320" alt="" class="blog-list__item-img">
-                </a>
-                <a href="#">
-                    <h3 class="blog-list__item-title title">Artigo 1</h3>
-                </a>
-            </div>
-            <div class="blog-list__item">
-                <a href="#" class="">
-                    <img src="https://placehold.co/506x320" alt="" class="blog-list__item-img">
-                </a>
-                <a href="#">
-                    <h3 class="blog-list__item-title title">Artigo 2</h3>
-                </a>
-            </div>
-            <div class="blog-list__item">
-                <a href="#" class="">
-                    <img src="https://placehold.co/506x320" alt="" class="blog-list__item-img">
-                </a>
-                <a href="#">
-                    <h3 class="blog-list__item-title title">Artigo 3</h3>
-                </a>
+            <div class="blog-list__button-area">
+                <a href="<?= get_home_url() . '/blog' ?>" class="blog-list__button btn btn--gold">Ver todos</a>
             </div>
         </div>
+    </section>
+<?php endif; ?>
 
-        <div class="blog-list__button-area">
-            <a href="#" class="blog-list__button btn btn--gold">Ver todos</a>
+<?php if (!empty(get_field_cmb2('contact_show'))): ?>
+    <section class="contacts">
+        <div class="container wrap">
+            <div class="contacts__header">
+                <?php if (!empty(get_field_cmb2('contact_pretitle'))): ?>
+                    <strong class="contacts__subtitle"><?= get_field_cmb2('contact_pretitle') ?></strong>
+                <?php endif; ?>
+                <?php if (!empty(get_field_cmb2('contact_title'))): ?>
+                    <h2 class="contacts__title title"><?= get_field_cmb2('contact_title') ?></h2>
+                <?php endif; ?>
+            </div>
+            <div class="contacts__list">
+                <?php foreach (get_field_cmb2('contacts') as $index => $item): ?>
+                    <div class="contacts__item">
+                        <?php if (!empty($item['icon'])): ?>
+                            <img src="<?= $item['icon'] ?>" alt="<?= !empty(get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE) : 'Ícone de contato' ?>" class="contacts__item-icon">
+                        <?php endif; ?>
+                        <?php if (!empty($item['title'])): ?>
+                            <h3 class="contacts__item-title"><?= $item['title'] ?></h3>
+                        <?php endif; ?>
+                        <?php if (!empty($item['desc'])): ?>
+                        <div class="contacts__item-desc">
+                            <?= wpautop($item['desc']) ?>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+<?php endif; ?>
 
-<section class="contacts">
-    <div class="container wrap">
-        <div class="contacts__header">
-            <strong class="contacts__subtitle">Contato</strong>
-            <h2 class="contacts__title title">Lorem Ipsum Dolor</h2>
-        </div>
-        <div class="contacts__list">
-            <div class="contacts__item">
-                <img src="https://placehold.co/84" alt="" class="contacts__item-icon">
-                <h3 class="contacts__item-title">Lorem ipsum dolor</h3>
-                <div class="contacts__item-desc">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue.</p>
-                </div>
-            </div>
-            <div class="contacts__item">
-                <img src="https://placehold.co/84" alt="" class="contacts__item-icon">
-                <h3 class="contacts__item-title">Lorem ipsum dolor</h3>
-                <div class="contacts__item-desc">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue.</p>
-                </div>
-            </div>
-            <div class="contacts__item">
-                <img src="https://placehold.co/84" alt="" class="contacts__item-icon">
-                <h3 class="contacts__item-title">Lorem ipsum dolor</h3>
-                <div class="contacts__item-desc">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt aliquam orci a imperdiet. In pellentesque laoreet odio eu venenatis. Sed efficitur non nisl a congue.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <?php get_footer() ?>

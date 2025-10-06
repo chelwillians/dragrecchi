@@ -213,7 +213,7 @@ function opt_page_register_theme_options_metabox()
         'type' => 'title',
     ));
 
-     $cmb_options->add_field(array(
+    $cmb_options->add_field(array(
         'id'      => 'logo_footer',
         'name'    => 'Logo footer',
         // 'desc'    => 'Resolução recomendada de 108x33',
@@ -263,13 +263,13 @@ function opt_page_register_theme_options_metabox()
 }
 add_action('cmb2_admin_init', 'opt_page_register_theme_options_metabox');
 
-function register_cpt_produtos()
+function register_cpt_procedimentos()
 {
-    register_post_type('produtos', array(
+    register_post_type('procedimentos', array(
         'publicly_queryable'  => true,
         'labels' => array(
-            'name' => 'Produtos',
-            'singular_name' => 'Produto',
+            'name' => 'Procedimentos',
+            'singular_name' => 'Procedimento',
             'add_new_item' => 'Adiconar novo',
         ),
         'show_in_rest' => true,
@@ -282,11 +282,11 @@ function register_cpt_produtos()
         'menu_icon' => 'dashicons-grid-view',
         'rewrite' => array(
             'with_front' => false,
-            'slug'       => 'produtos'
+            'slug'       => 'procedimentos'
         )
     ));
 }
-add_action('init', 'register_cpt_produtos');
+add_action('init', 'register_cpt_procedimentos');
 
 // Fields
 function cmb2_h1_title()
@@ -376,19 +376,27 @@ function cmb2_main_banner()
     ));
 
     $cmb_main_banner->add_group_field($banners, array(
+        'id'      => 'pretitle',
+        'name'    => 'Pré Título',
+        'type'    => 'text',
+    ));
+
+    $cmb_main_banner->add_group_field($banners, array(
         'id'      => 'title',
         'name'    => 'Título',
         'type'    => 'text',
     ));
 
     $cmb_main_banner->add_group_field($banners, array(
-        'id'      => 'desc',
-        'name'    => 'Descrição',
-        'type'    => 'wysiwyg',
-        'options' => array(
-            'wpautop' => true,
-            'media_buttons' => false,
-        ),
+        'id'      => 'link_btn',
+        'name'    => 'Link',
+        'type'    => 'text',
+    ));
+
+    $cmb_main_banner->add_group_field($banners, array(
+        'id'      => 'text_btn',
+        'name'    => 'Texto botão',
+        'type'    => 'text',
     ));
 }
 add_action('cmb2_admin_init', 'cmb2_main_banner');
@@ -418,12 +426,6 @@ function cmb2_about()
     ));
 
     $cmb_about->add_field(array(
-        'id'   => 'about_subtitle',
-        'name' => 'Subtítulo ',
-        'type' => 'text',
-    ));
-
-    $cmb_about->add_field(array(
         'id'   => 'about_desc',
         'name' => 'Descrição',
         'type'    => 'wysiwyg',
@@ -433,21 +435,21 @@ function cmb2_about()
         ),
     ));
 
-    $cmb_about->add_field(array(
-        'id'   => 'about_link',
-        'name' => 'Link botão',
-        'type' => 'text',
-    ));
+    // $cmb_about->add_field(array(
+    //     'id'   => 'about_link',
+    //     'name' => 'Link botão',
+    //     'type' => 'text',
+    // ));
 
-    $cmb_about->add_field(array(
-        'id'   => 'about_text_button',
-        'name' => 'Texto botão',
-        'type' => 'text',
-    ));
+    // $cmb_about->add_field(array(
+    //     'id'   => 'about_text_button',
+    //     'name' => 'Texto botão',
+    //     'type' => 'text',
+    // ));
 
     $cmb_about->add_field(array(
         'id'   => 'about_image',
-        'name' => 'Texto botão',
+        'name' => 'Imagem',
         'desc'    => 'Resolução recomendada de 1372x1074',
         'type'    => 'file',
         'options' => array(
@@ -464,11 +466,11 @@ function cmb2_about()
 }
 add_action('cmb2_admin_init', 'cmb2_about');
 
-function cmb2_telas()
+function cmb2_procedures()
 {
-    $cmb_telas = new_cmb2_box(array(
-        'id'            => 'cmb2_telas',
-        'title'         => __('Seção - Telas', 'cmb2'),
+    $cmb_procedures = new_cmb2_box(array(
+        'id'            => 'cmb2_procedures',
+        'title'         => __('Seção - Procedimentos', 'cmb2'),
         'object_types'  => array('page'),
         'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
         'context'       => 'normal',
@@ -476,20 +478,20 @@ function cmb2_telas()
         'show_names'    => true, // Show field names on the left
     ));
 
-    $cmb_telas->add_field(array(
-        'id'   => 'telas_show',
+    $cmb_procedures->add_field(array(
+        'id'   => 'procedures_show',
         'name' => 'Mostrar seção? ',
         'type' => 'checkbox',
     ));
 
-    $cmb_telas->add_field(array(
-        'id'   => 'telas_title',
+    $cmb_procedures->add_field(array(
+        'id'   => 'procedures_title',
         'name' => 'Título ',
         'type' => 'text',
     ));
 
-    $cmb_telas->add_field(array(
-        'id'   => 'telas_desc',
+    $cmb_procedures->add_field(array(
+        'id'   => 'procedures_desc',
         'name' => 'Descrição',
         'type'    => 'wysiwyg',
         'options' => array(
@@ -498,35 +500,47 @@ function cmb2_telas()
         ),
     ));
 
-    $cmb_telas->add_field(array(
-        'id'   => 'telas_subtitle',
-        'name' => 'Subtítulo ',
-        'type' => 'text',
-    ));
-
-    $telas = $cmb_telas->add_field(array(
-        'id'          => 'telas',
-        'type'        => 'group',
-        // 'repeatable'  => false, // use false if you want non-repeatable group
-        'options'     => array(
-            'group_title'       => __('Tela {#}', 'cmb2'),
-            'add_button'        => __('Adicionar tela', 'cmb2'),
-            'remove_button'     => __('Remover', 'cmb2'),
-            'sortable'          => true,
-            'closed'         => true,
-            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
-        ),
-    ));
-
-    $cmb_telas->add_group_field($telas, array(
-        'id'      => 'title',
-        'name'    => 'Título',
+    $cmb_procedures->add_field(array(
+        'id'      => 'procedures_link_btn',
+        'name'    => 'Link',
         'type'    => 'text',
     ));
 
-    $cmb_telas->add_group_field($telas, array(
-        'id'      => 'desc',
-        'name'    => 'Descrição',
+    $cmb_procedures->add_field(array(
+        'id'      => 'procedures_text_btn',
+        'name'    => 'Texto botão',
+        'type'    => 'text',
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_procedures');
+
+function cmb2_text_image_list()
+{
+    $cmb_text_image_list = new_cmb2_box(array(
+        'id'            => 'cmb2_text_image_list',
+        'title'         => __('Seção - Texto com imagem e lista', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_text_image_list->add_field(array(
+        'id'   => 'text_image_list_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_text_image_list->add_field(array(
+        'id'   => 'text_image_list_title',
+        'name' => 'Título ',
+        'type' => 'text',
+    ));
+
+    $cmb_text_image_list->add_field(array(
+        'id'   => 'text_image_list_desc',
+        'name' => 'Descrição',
         'type'    => 'wysiwyg',
         'options' => array(
             'wpautop' => true,
@@ -534,7 +548,38 @@ function cmb2_telas()
         ),
     ));
 
-    $cmb_telas->add_group_field($telas, array(
+    $cmb_text_image_list->add_field(array(
+        'id'   => 'text_image_list_image',
+        'name' => 'Imagem',
+        'desc'    => 'Resolução recomendada de 1372x1074',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar imagem'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+
+    $list = $cmb_text_image_list->add_field(array(
+        'id'          => 'list',
+        'type'        => 'group',
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'       => __('Item {#} da lista', 'cmb2'),
+            'add_button'        => __('Adicionar', 'cmb2'),
+            'remove_button'     => __('Remover', 'cmb2'),
+            'sortable'          => true,
+            'closed'         => true,
+            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+        ),
+    ));
+
+    $cmb_text_image_list->add_group_field($list, array(
         'id'      => 'icon',
         'name'    => 'Ícone',
         'desc'    => 'Resolução recomendada de 42x42',
@@ -551,30 +596,19 @@ function cmb2_telas()
         'preview_size' => 'medium',
     ));
 
-    $cmb_telas->add_group_field($telas, array(
-        'id'      => 'image',
-        'name'    => 'Imagem Desktop',
-        'desc'    => 'Resolução recomendada de 588x485',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar imagem'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
+    $cmb_text_image_list->add_group_field($list, array(
+        'id'      => 'text',
+        'name'    => 'Texto',
+        'type'    => 'text',
     ));
 }
-add_action('cmb2_admin_init', 'cmb2_telas');
+add_action('cmb2_admin_init', 'cmb2_text_image_list');
 
-function cmb2_points()
+function cmb2_testmonials()
 {
-    $cmb_points = new_cmb2_box(array(
-        'id'            => 'cmb2_points',
-        'title'         => __('Seção - Pontos', 'cmb2'),
+    $cmb_testmonials = new_cmb2_box(array(
+        'id'            => 'cmb2_testmonials',
+        'title'         => __('Seção - Depoimentos', 'cmb2'),
         'object_types'  => array('page'),
         'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
         'context'       => 'normal',
@@ -582,21 +616,45 @@ function cmb2_points()
         'show_names'    => true, // Show field names on the left
     ));
 
-    $cmb_points->add_field(array(
-        'id'   => 'points_show',
+    $cmb_testmonials->add_field(array(
+        'id'   => 'testmonials_show',
         'name' => 'Mostrar seção? ',
         'type' => 'checkbox',
     ));
 
-    $cmb_points->add_field(array(
-        'id'   => 'points_title',
+    $cmb_testmonials->add_field(array(
+        'id'   => 'testmonials_title',
         'name' => 'Título ',
         'type' => 'text',
         'sanitization_cb' => 'prefix_sanitize_text_callback'
     ));
 
-    $cmb_points->add_field(array(
-        'id'   => 'points_video',
+    $cmb_testmonials->add_field(array(
+        'id'   => 'testmonials_desc',
+        'name' => 'Descrição ',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+
+    $testmonials = $cmb_testmonials->add_field(array(
+        'id'          => 'testmonials',
+        'type'        => 'group',
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'       => __('Depoimento {#}', 'cmb2'),
+            'add_button'        => __('Adicionar', 'cmb2'),
+            'remove_button'     => __('Remover', 'cmb2'),
+            'sortable'          => true,
+            'closed'         => true,
+            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+        ),
+    ));
+
+    $cmb_testmonials->add_group_field($testmonials, array(
+        'id'      => 'video',
         'name' => 'Vídeo',
         'type'    => 'file',
         'options' => array(
@@ -607,309 +665,28 @@ function cmb2_points()
         ),
         'query_args' => array(
             'type' => array('video/webm'),
+            'type' => array('video/mp4'),
         ),
         'preview_size' => 'medium',
     ));
 
-    $cmb_points->add_field(array(
-        'id'   => 'points_video_poster',
-        'name' => 'Poster',
-        'desc' => 'Imagem de carregamento do vídeo',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar vídeo'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
-    ));
-
-    $points = $cmb_points->add_field(array(
-        'id'          => 'points',
-        'type'        => 'group',
-        // 'repeatable'  => false, // use false if you want non-repeatable group
-        'options'     => array(
-            'group_title'       => __('Ponto {#}', 'cmb2'),
-            'add_button'        => __('Adicionar ponto', 'cmb2'),
-            'remove_button'     => __('Remover', 'cmb2'),
-            'sortable'          => true,
-            'closed'         => true,
-            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
-        ),
-    ));
-
-    $cmb_points->add_group_field($points, array(
-        'id'      => 'desc',
-        'name'    => 'Descrição',
-        'type'    => 'text',
-    ));
-
-    $cmb_points->add_group_field($points, array(
-        'id'      => 'icon',
-        'name'    => 'Ícone',
-        'desc'    => 'Resolução recomendada de 42x42',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar imagem'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
-    ));
+    // $cmb_testmonials->add_group_field($testmonials, array(
+    //     'id'      => 'poster',
+    //     'name' => 'Capa do vídeo',
+    //     'type'    => 'file',
+    //     'options' => array(
+    //         'url' => false,
+    //     ),
+    //     'text'    => array(
+    //         'add_upload_file_text' => 'Adicionar vídeo'
+    //     ),
+    //     'query_args' => array(
+    //         'type' => array('video/webm'),
+    //     ),
+    //     'preview_size' => 'medium',
+    // ));
 }
-add_action('cmb2_admin_init', 'cmb2_points');
-
-function cmb2_products()
-{
-    $cmb_products = new_cmb2_box(array(
-        'id'            => 'cmb2_products',
-        'title'         => __('Seção - Produtos', 'cmb2'),
-        'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
-        'context'       => 'normal',
-        'priority'      => 'high',
-        'show_names'    => true, // Show field names on the left
-    ));
-
-    $cmb_products->add_field(array(
-        'id'   => 'products_show',
-        'name' => 'Mostrar seção? ',
-        'type' => 'checkbox',
-    ));
-
-    $cmb_products->add_field(array(
-        'id'   => 'products_title',
-        'name' => 'Título',
-        'type' => 'text',
-    ));
-
-    $cmb_products->add_field(array(
-        'id'   => 'products_desc',
-        'name' => 'Descrição ',
-        'type'    => 'wysiwyg',
-        'options' => array(
-            'wpautop' => true,
-            'media_buttons' => false,
-        ),
-    ));
-
-    $cmb_products->add_field(array(
-        'id'   => 'products_text_button',
-        'name' => 'Texto botão',
-        'type' => 'text',
-    ));
-
-    $cmb_products->add_field(array(
-        'id'   => 'products_link_button',
-        'name' => 'Link botão',
-        'type' => 'text',
-    ));
-}
-add_action('cmb2_admin_init', 'cmb2_products');
-
-function cmb2_commitments()
-{
-    $cmb_commitments = new_cmb2_box(array(
-        'id'            => 'cmb2_commitments',
-        'title'         => __('Seção - Compromissos', 'cmb2'),
-        'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
-        'context'       => 'normal',
-        'priority'      => 'high',
-        'show_names'    => true, // Show field names on the left
-    ));
-
-    $cmb_commitments->add_field(array(
-        'id'   => 'commitments_show',
-        'name' => 'Mostrar seção? ',
-        'type' => 'checkbox',
-    ));
-
-    $cmb_commitments->add_field(array(
-        'id'   => 'commitments_bg',
-        'name' => 'Imagem de fundo',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar imagem'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
-    ));
-
-    $cmb_commitments->add_field(array(
-        'id'   => 'commitments_title',
-        'name' => 'Título',
-        'type' => 'text',
-    ));
-
-    $commitments = $cmb_commitments->add_field(array(
-        'id'          => 'commitments',
-        'type'        => 'group',
-        // 'repeatable'  => false, // use false if you want non-repeatable group
-        'options'     => array(
-            'group_title'       => __('Compromisso {#}', 'cmb2'),
-            'add_button'        => __('Adicionar compromisso', 'cmb2'),
-            'remove_button'     => __('Remover', 'cmb2'),
-            'sortable'          => true,
-            'closed'         => true,
-            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
-        ),
-    ));
-
-    $cmb_commitments->add_group_field($commitments, array(
-        'id'      => 'title',
-        'name'    => 'Título',
-        'type'    => 'text',
-    ));
-
-    $cmb_commitments->add_group_field($commitments, array(
-        'id'      => 'desc',
-        'name'    => 'Descrição',
-        'type'    => 'wysiwyg',
-        'options' => array(
-            'wpautop' => true,
-            'media_buttons' => false,
-        ),
-    ));
-}
-add_action('cmb2_admin_init', 'cmb2_commitments');
-
-function cmb2_logos_1()
-{
-    $cmb_logos_1 = new_cmb2_box(array(
-        'id'            => 'cmb2_logos_1',
-        'title'         => __('Seção - Logos 1', 'cmb2'),
-        'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
-        'context'       => 'normal',
-        'priority'      => 'high',
-        'show_names'    => true, // Show field names on the left
-    ));
-
-    $cmb_logos_1->add_field(array(
-        'id'   => 'logos_1_show',
-        'name' => 'Mostrar seção? ',
-        'type' => 'checkbox',
-    ));
-
-    $cmb_logos_1->add_field(array(
-        'id'   => 'logos_1_pre_title',
-        'name' => 'Pré título ',
-        'type' => 'text',
-    ));
-
-    $cmb_logos_1->add_field(array(
-        'id'   => 'logos_1_title',
-        'name' => 'Título ',
-        'type' => 'text',
-    ));
-
-    $logos = $cmb_logos_1->add_field(array(
-        'id'          => 'logos_1',
-        'type'        => 'group',
-        // 'repeatable'  => false, // use false if you want non-repeatable group
-        'options'     => array(
-            'group_title'       => __('Logo {#}', 'cmb2'),
-            'add_button'        => __('Adicionar logo', 'cmb2'),
-            'remove_button'     => __('Remover', 'cmb2'),
-            'sortable'          => true,
-            'closed'         => true,
-            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
-        ),
-    ));
-    $cmb_logos_1->add_group_field($logos, array(
-        'id'      => 'logo',
-        'name'    => 'Logo',
-        'desc'    => 'Resolução recomendada de 356x100',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar imagem'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
-    ));
-}
-add_action('cmb2_admin_init', 'cmb2_logos_1');
-
-function cmb2_logos_2()
-{
-    $cmb_logos_2 = new_cmb2_box(array(
-        'id'            => 'cmb2_logos_2',
-        'title'         => __('Seção - Logos 2', 'cmb2'),
-        'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
-        'context'       => 'normal',
-        'priority'      => 'high',
-        'show_names'    => true, // Show field names on the left
-    ));
-
-    $cmb_logos_2->add_field(array(
-        'id'   => 'logos_2_show',
-        'name' => 'Mostrar seção? ',
-        'type' => 'checkbox',
-    ));
-
-    $cmb_logos_2->add_field(array(
-        'id'   => 'logos_2_pre_title',
-        'name' => 'Pré título ',
-        'type' => 'text',
-    ));
-
-    $cmb_logos_2->add_field(array(
-        'id'   => 'logos_2_title',
-        'name' => 'Título ',
-        'type' => 'text',
-    ));
-
-    $logos = $cmb_logos_2->add_field(array(
-        'id'          => 'logos_2',
-        'type'        => 'group',
-        // 'repeatable'  => false, // use false if you want non-repeatable group
-        'options'     => array(
-            'group_title'       => __('Logo {#}', 'cmb2'),
-            'add_button'        => __('Adicionar logo', 'cmb2'),
-            'remove_button'     => __('Remover', 'cmb2'),
-            'sortable'          => true,
-            'closed'         => true,
-            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
-        ),
-    ));
-    $cmb_logos_2->add_group_field($logos, array(
-        'id'      => 'logo',
-        'name'    => 'Logo',
-        'desc'    => 'Resolução recomendada de 356x200',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar imagem'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
-    ));
-}
-add_action('cmb2_admin_init', 'cmb2_logos_2');
+add_action('cmb2_admin_init', 'cmb2_testmonials');
 
 function cmb2_contact()
 {
@@ -930,27 +707,63 @@ function cmb2_contact()
     ));
 
     $cmb_contact->add_field(array(
-        'id'   => 'contact_title',
-        'name' => 'Título ',
+        'id'   => 'contact_pretitle',
+        'name' => 'Pré Título ',
         'type' => 'text',
+        'sanitization_cb' => 'prefix_sanitize_text_callback'
     ));
 
     $cmb_contact->add_field(array(
-        'id'   => 'contact_desc',
+        'id'   => 'contact_title',
+        'name' => 'Título ',
+        'type' => 'text',
+        'sanitization_cb' => 'prefix_sanitize_text_callback'
+    ));
+
+    $contacts = $cmb_contact->add_field(array(
+        'id'          => 'contacts',
+        'type'        => 'group',
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'       => __('Contato {#}', 'cmb2'),
+            'add_button'        => __('Adicionar', 'cmb2'),
+            'remove_button'     => __('Remover', 'cmb2'),
+            'sortable'          => true,
+            'closed'         => true,
+            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+        ),
+    ));
+
+    $cmb_contact->add_group_field($contacts, array(
+        'id'      => 'icon',
+        'name' => 'Ícone',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar vídeo'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+
+    $cmb_contact->add_group_field($contacts, array(
+        'id'      => 'title',
+        'name' => 'Título',
+        'type'    => 'text',
+    ));
+
+    $cmb_contact->add_group_field($contacts, array(
+        'id'      => 'desc',
         'name' => 'Descrição',
-        'type'    => 'text',
-    ));
-
-     $cmb_contact->add_field(array(
-        'id'   => 'contact_shortcode',
-        'name' => 'Shortcode',
-        'type'    => 'text',
-    ));
-
-     $cmb_contact->add_field(array(
-        'id'   => 'contact_shortcode',
-        'name' => 'Shortcode',
-        'type'    => 'text',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
     ));
 }
 add_action('cmb2_admin_init', 'cmb2_contact');
