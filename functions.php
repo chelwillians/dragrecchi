@@ -63,6 +63,7 @@ function hide_editor()
     $templates_to_hide_editor = [
         'index.php',
         'about.php',
+        'procedures.php',
     ];
 
     // Remove o suporte ao editor para templates especificados
@@ -295,7 +296,7 @@ function cmb2_h1_title()
         'id'            => 'cmb2_h1',
         'title'         => __('H1', 'cmb2'),
         'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => ['index.php', 'about.php']),
+        'show_on' => array('key' => 'page-template', 'value' => ['index.php', 'about.php', 'procedures.php']),
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
@@ -996,3 +997,131 @@ function cmb2_faq()
     ));
 }
 add_action('cmb2_admin_init', 'cmb2_faq');
+
+function cmb2_internal_banner()
+{
+    $cmb_internal_banner = new_cmb2_box(array(
+        'id'            => 'cmb2_internal_banner',
+        'title'         => __('Seção - Banner', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php']),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_internal_banner->add_field(array(
+        'id'   => 'internal_banner_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $internal_banners = $cmb_internal_banner->add_field(array(
+        'id'          => 'internal_sliders',
+        'type'        => 'group',
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'       => __('Slider {#}', 'cmb2'),
+            'add_button'        => __('Adicionar slide', 'cmb2'),
+            'remove_button'     => __('Remover', 'cmb2'),
+            'sortable'          => true,
+            'closed'         => true,
+            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+        ),
+    ));
+
+    $cmb_internal_banner->add_group_field($internal_banners, array(
+        'id'      => 'image_desk',
+        'name'    => 'Imagem Desktop',
+        'desc'    => 'Resolução recomendada de 1920x724',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar imagem'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+
+    $cmb_internal_banner->add_group_field($internal_banners, array(
+        'id'      => 'image_mobile',
+        'name'    => 'Imagem Mobile',
+        'desc'    => 'Resolução recomendada de 1080x1080',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar imagem'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+
+    $cmb_internal_banner->add_group_field($internal_banners, array(
+        'id'      => 'pretitle',
+        'name'    => 'Pré Título',
+        'type'    => 'text',
+    ));
+
+    $cmb_internal_banner->add_group_field($internal_banners, array(
+        'id'      => 'title',
+        'name'    => 'Título',
+        'type'    => 'text',
+    ));
+
+    // $cmb_internal_banner->add_group_field($internal_banners, array(
+    //     'id'      => 'link_btn',
+    //     'name'    => 'Link',
+    //     'type'    => 'text',
+    // ));
+
+    // $cmb_internal_banner->add_group_field($internal_banners, array(
+    //     'id'      => 'text_btn',
+    //     'name'    => 'Texto botão',
+    //     'type'    => 'text',
+    // ));
+}
+add_action('cmb2_admin_init', 'cmb2_internal_banner');
+
+function cmb2_call_text()
+{
+    $cmb_call_text = new_cmb2_box(array(
+        'id'            => 'cmb2_call_text',
+        'title'         => __('Seção - Chamada', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php']),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_call_text->add_field(array(
+        'id'   => 'call_text_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_call_text->add_field(array(
+        'id'   => 'call_text_title',
+        'name' => 'Título ',
+        'type' => 'text',
+    ));
+
+    $cmb_call_text->add_field(array(
+        'id'   => 'call_text_desc',
+        'name' => 'Descrição ',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_call_text');
