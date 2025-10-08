@@ -64,6 +64,7 @@ function hide_editor()
         'index.php',
         'about.php',
         'procedures.php',
+        'blog.php',
     ];
 
     // Remove o suporte ao editor para templates especificados
@@ -1004,7 +1005,7 @@ function cmb2_internal_banner()
         'id'            => 'cmb2_internal_banner',
         'title'         => __('Seção - Banner', 'cmb2'),
         'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php']),
+        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php', 'blog.php']),
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
@@ -1096,7 +1097,7 @@ function cmb2_call_text()
         'id'            => 'cmb2_call_text',
         'title'         => __('Seção - Chamada', 'cmb2'),
         'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php']),
+        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php', 'blog.php']),
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
