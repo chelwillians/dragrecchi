@@ -15,7 +15,7 @@
 
 <body <?php body_class() ?>>
     <?php wp_body_open(); ?>
-    <header class="main-header main-header--float">
+    <header class="main-header main-header--float <?= !empty($args['class']) && isset($args['class']) ? $args['class'] : '' ?>">
         <div class="container wrap">
             <a href="<?= get_home_url() ?>" class="main-header__logo">
                 <img src="<?php echo !empty(get_option('opt_page_theme_options')['logo']) ? get_option('opt_page_theme_options')['logo'] : get_template_directory_uri() . '/dist/images/logo.svg' ?>" alt="Logo">
