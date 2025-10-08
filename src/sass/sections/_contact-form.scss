@@ -9,6 +9,10 @@
         display: flex;
         flex-wrap: wrap;
         gap: 18px;
+
+        br{
+            display: none;
+        }
     }
 
     .half {
@@ -55,6 +59,13 @@
 
     .full {
         width: 100%;
+    }
+
+    .button-area{
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 
     &__call {

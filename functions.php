@@ -65,6 +65,7 @@ function hide_editor()
         'about.php',
         'procedures.php',
         'blog.php',
+        'contact.php',
     ];
 
     // Remove o suporte ao editor para templates especificados
@@ -261,6 +262,78 @@ function opt_page_register_theme_options_metabox()
         'id'   => 'email',
         'name' => 'E-mail',
         'type' => 'text',
+    ));
+
+    $cmb_options->add_field(array(
+        'id'   => 'cmb2_title_contacts',
+        'name' => 'Contatos',
+        'type' => 'title',
+    ));
+
+    $cmb_options->add_field(array(
+        'id'   => 'contact_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_options->add_field(array(
+        'id'   => 'contact_pretitle',
+        'name' => 'Pré Título ',
+        'type' => 'text',
+        'sanitization_cb' => 'prefix_sanitize_text_callback'
+    ));
+
+    $cmb_options->add_field(array(
+        'id'   => 'contact_title',
+        'name' => 'Título ',
+        'type' => 'text',
+        'sanitization_cb' => 'prefix_sanitize_text_callback'
+    ));
+
+    $contacts = $cmb_options->add_field(array(
+        'id'          => 'contacts',
+        'type'        => 'group',
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'       => __('Contato {#}', 'cmb2'),
+            'add_button'        => __('Adicionar', 'cmb2'),
+            'remove_button'     => __('Remover', 'cmb2'),
+            'sortable'          => true,
+            'closed'         => true,
+            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+        ),
+    ));
+
+    $cmb_options->add_group_field($contacts, array(
+        'id'      => 'icon',
+        'name' => 'Ícone',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Adicionar vídeo'
+        ),
+        'query_args' => array(
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+        ),
+        'preview_size' => 'medium',
+    ));
+
+    $cmb_options->add_group_field($contacts, array(
+        'id'      => 'title',
+        'name' => 'Título',
+        'type'    => 'text',
+    ));
+
+    $cmb_options->add_group_field($contacts, array(
+        'id'      => 'desc',
+        'name' => 'Descrição',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
     ));
 }
 add_action('cmb2_admin_init', 'opt_page_register_theme_options_metabox');
@@ -690,85 +763,85 @@ function cmb2_testmonials()
 }
 add_action('cmb2_admin_init', 'cmb2_testmonials');
 
-function cmb2_contact()
-{
-    $cmb_contact = new_cmb2_box(array(
-        'id'            => 'cmb2_contact',
-        'title'         => __('Seção - Contato', 'cmb2'),
-        'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
-        'context'       => 'normal',
-        'priority'      => 'high',
-        'show_names'    => true, // Show field names on the left
-    ));
+// function cmb2_contact()
+// {
+//     $cmb_contact = new_cmb2_box(array(
+//         'id'            => 'cmb2_contact',
+//         'title'         => __('Seção - Contato', 'cmb2'),
+//         'object_types'  => array('page'),
+//         'show_on' => array('key' => 'page-template', 'value' => 'index.php'),
+//         'context'       => 'normal',
+//         'priority'      => 'high',
+//         'show_names'    => true, // Show field names on the left
+//     ));
 
-    $cmb_contact->add_field(array(
-        'id'   => 'contact_show',
-        'name' => 'Mostrar seção? ',
-        'type' => 'checkbox',
-    ));
+//     $cmb_contact->add_field(array(
+//         'id'   => 'contact_show',
+//         'name' => 'Mostrar seção? ',
+//         'type' => 'checkbox',
+//     ));
 
-    $cmb_contact->add_field(array(
-        'id'   => 'contact_pretitle',
-        'name' => 'Pré Título ',
-        'type' => 'text',
-        'sanitization_cb' => 'prefix_sanitize_text_callback'
-    ));
+//     $cmb_contact->add_field(array(
+//         'id'   => 'contact_pretitle',
+//         'name' => 'Pré Título ',
+//         'type' => 'text',
+//         'sanitization_cb' => 'prefix_sanitize_text_callback'
+//     ));
 
-    $cmb_contact->add_field(array(
-        'id'   => 'contact_title',
-        'name' => 'Título ',
-        'type' => 'text',
-        'sanitization_cb' => 'prefix_sanitize_text_callback'
-    ));
+//     $cmb_contact->add_field(array(
+//         'id'   => 'contact_title',
+//         'name' => 'Título ',
+//         'type' => 'text',
+//         'sanitization_cb' => 'prefix_sanitize_text_callback'
+//     ));
 
-    $contacts = $cmb_contact->add_field(array(
-        'id'          => 'contacts',
-        'type'        => 'group',
-        // 'repeatable'  => false, // use false if you want non-repeatable group
-        'options'     => array(
-            'group_title'       => __('Contato {#}', 'cmb2'),
-            'add_button'        => __('Adicionar', 'cmb2'),
-            'remove_button'     => __('Remover', 'cmb2'),
-            'sortable'          => true,
-            'closed'         => true,
-            'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
-        ),
-    ));
+//     $contacts = $cmb_contact->add_field(array(
+//         'id'          => 'contacts',
+//         'type'        => 'group',
+//         // 'repeatable'  => false, // use false if you want non-repeatable group
+//         'options'     => array(
+//             'group_title'       => __('Contato {#}', 'cmb2'),
+//             'add_button'        => __('Adicionar', 'cmb2'),
+//             'remove_button'     => __('Remover', 'cmb2'),
+//             'sortable'          => true,
+//             'closed'         => true,
+//             'remove_confirm' => esc_html__('Are you sure you want to remove?', 'cmb2'),
+//         ),
+//     ));
 
-    $cmb_contact->add_group_field($contacts, array(
-        'id'      => 'icon',
-        'name' => 'Ícone',
-        'type'    => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'text'    => array(
-            'add_upload_file_text' => 'Adicionar vídeo'
-        ),
-        'query_args' => array(
-            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
-        ),
-        'preview_size' => 'medium',
-    ));
+//     $cmb_contact->add_group_field($contacts, array(
+//         'id'      => 'icon',
+//         'name' => 'Ícone',
+//         'type'    => 'file',
+//         'options' => array(
+//             'url' => false,
+//         ),
+//         'text'    => array(
+//             'add_upload_file_text' => 'Adicionar vídeo'
+//         ),
+//         'query_args' => array(
+//             'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
+//         ),
+//         'preview_size' => 'medium',
+//     ));
 
-    $cmb_contact->add_group_field($contacts, array(
-        'id'      => 'title',
-        'name' => 'Título',
-        'type'    => 'text',
-    ));
+//     $cmb_contact->add_group_field($contacts, array(
+//         'id'      => 'title',
+//         'name' => 'Título',
+//         'type'    => 'text',
+//     ));
 
-    $cmb_contact->add_group_field($contacts, array(
-        'id'      => 'desc',
-        'name' => 'Descrição',
-        'type'    => 'wysiwyg',
-        'options' => array(
-            'wpautop' => true,
-            'media_buttons' => false,
-        ),
-    ));
-}
-add_action('cmb2_admin_init', 'cmb2_contact');
+//     $cmb_contact->add_group_field($contacts, array(
+//         'id'      => 'desc',
+//         'name' => 'Descrição',
+//         'type'    => 'wysiwyg',
+//         'options' => array(
+//             'wpautop' => true,
+//             'media_buttons' => false,
+//         ),
+//     ));
+// }
+// add_action('cmb2_admin_init', 'cmb2_contact');
 
 function cmb2_text_image()
 {
@@ -1005,7 +1078,7 @@ function cmb2_internal_banner()
         'id'            => 'cmb2_internal_banner',
         'title'         => __('Seção - Banner', 'cmb2'),
         'object_types'  => array('page'),
-        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php', 'blog.php']),
+        'show_on' => array('key' => 'page-template', 'value' => ['procedures.php', 'blog.php', 'contact.php']),
         'context'       => 'normal',
         'priority'      => 'high',
         'show_names'    => true, // Show field names on the left
@@ -1126,3 +1199,39 @@ function cmb2_call_text()
     ));
 }
 add_action('cmb2_admin_init', 'cmb2_call_text');
+
+function cmb2_contact_form()
+{
+    $cmb_contact_form = new_cmb2_box(array(
+        'id'            => 'cmb2_contact_form',
+        'title'         => __('Seção - Formulário de Contato', 'cmb2'),
+        'object_types'  => array('page'),
+        'show_on' => array('key' => 'page-template', 'value' => ['contact.php']),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'show_names'    => true, // Show field names on the left
+    ));
+
+    $cmb_contact_form->add_field(array(
+        'id'   => 'contact_form_show',
+        'name' => 'Mostrar seção? ',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_contact_form->add_field(array(
+        'id'   => 'contact_form_desc',
+        'name' => 'Descrição ',
+        'type'    => 'wysiwyg',
+        'options' => array(
+            'wpautop' => true,
+            'media_buttons' => false,
+        ),
+    ));
+
+    $cmb_contact_form->add_field(array(
+        'id'   => 'contact_form_shortcode',
+        'name' => 'Shortcode formulário',
+        'type'    => 'text',
+    ));
+}
+add_action('cmb2_admin_init', 'cmb2_contact_form');

@@ -209,19 +209,19 @@ if (have_posts()) :
     </section>
 <?php endif; ?>
 
-<?php if (!empty(get_field_cmb2('contact_show'))): ?>
+<?php if (!empty(get_option('opt_page_theme_options')['contact_show'])): ?>
     <section class="contacts">
         <div class="container wrap">
             <div class="contacts__header">
-                <?php if (!empty(get_field_cmb2('contact_pretitle'))): ?>
-                    <strong class="contacts__subtitle"><?= get_field_cmb2('contact_pretitle') ?></strong>
+                <?php if (!empty(get_option('opt_page_theme_options')['contact_pretitle'])): ?>
+                    <strong class="contacts__subtitle"><?= get_option('opt_page_theme_options')['contact_pretitle'] ?></strong>
                 <?php endif; ?>
-                <?php if (!empty(get_field_cmb2('contact_title'))): ?>
-                    <h2 class="contacts__title title"><?= get_field_cmb2('contact_title') ?></h2>
+                <?php if (!empty(get_option('opt_page_theme_options')['contact_title'])): ?>
+                    <h2 class="contacts__title title"><?= get_option('opt_page_theme_options')['contact_title'] ?></h2>
                 <?php endif; ?>
             </div>
             <div class="contacts__list">
-                <?php foreach (get_field_cmb2('contacts') as $index => $item): ?>
+                <?php foreach (get_option('opt_page_theme_options')['contacts'] as $index => $item): ?>
                     <div class="contacts__item">
                         <?php if (!empty($item['icon'])): ?>
                             <img src="<?= $item['icon'] ?>" alt="<?= !empty(get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE) : 'Ícone de contato' ?>" class="contacts__item-icon">
