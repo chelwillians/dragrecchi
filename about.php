@@ -7,29 +7,24 @@
 get_header() ?>
 
 <?php if (!empty(get_field_cmb2('banner_show')) && !empty(get_field_cmb2('sliders'))): ?>
-    <section class="main-banner">
-        <h1 class="hide-title"><?= !empty(get_field_cmb2('h1_content')) ? get_field_cmb2('h1_content') : get_the_title() ?></h1>
-        <div class="main-banner__list swiper">
+    <h1 class="hide-title"><?= !empty(get_field_cmb2('h1_content')) ? get_field_cmb2('h1_content') : get_the_title() ?></h1>
+    <section class="internal-banner">
+        <div class="internal-banner__list swiper">
             <div class="swiper-wrapper">
                 <?php foreach (get_field_cmb2('sliders') as $index => $item): ?>
-                    <div class="main-banner__item swiper-slide">
+                    <div class="internal-banner__item swiper-slide">
                         <?php if (!empty($item['image_desk'])): ?>
-                            <img src="<?= $item['image_desk'] ?>" class="main-banner__item-image main-banner__item-image--desk" alt="<?= !empty(get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>">
+                            <img src="<?= $item['image_desk'] ?>" class="internal-banner__item-image internal-banner__item-image--desk" alt="<?= !empty(get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>">
                         <?php endif; ?>
-                        <?php if (!empty($item['image_mobile'])): ?>
-                            <img src="<?= $item['image_mobile'] ?>" class="main-banner__item-image main-banner__item-image--mobile" alt="<?= !empty(get_post_meta($item['image_mobile_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['image_mobile_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>">
+                        <?php if (!empty($item['image_desk'])): ?>
+                            <img src="<?= $item['image_desk'] ?>" class="internal-banner__item-image internal-banner__item-image--mobile" alt="<?= !empty(get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['image_desk_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>">
                         <?php endif; ?>
                         <div class="container wrap">
                             <?php if (!empty($item['pretitle'])): ?>
-                                <span class="main-banner__item-subtitle"><?= $item['pretitle'] ?></span>
+                                <span class="internal-banner__item-subtitle"><?= $item['pretitle'] ?></span>
                             <?php endif; ?>
                             <?php if (!empty($item['title'])): ?>
-                                <span class="main-banner__item-title"><?= $item['title'] ?></span>
-                            <?php endif; ?>
-                            <?php if (!empty($item['link_btn'])): ?>
-                                <div class="main-banner__item-button-area">
-                                    <a href="<?= $item['link_btn'] ?>" class="main-banner__item-button btn btn--default"><?= !empty($item['text_btn']) ? $item['text_btn'] : "Agendar";  ?></a>
-                                </div>
+                                <span class="internal-banner__item-title"><?= $item['title'] ?></span>
                             <?php endif; ?>
                         </div>
                     </div>

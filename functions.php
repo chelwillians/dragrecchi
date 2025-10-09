@@ -730,17 +730,18 @@ function cmb2_testmonials()
 
     $cmb_testmonials->add_group_field($testmonials, array(
         'id'      => 'video',
-        'name' => 'Vídeo',
+        'name' => 'Mídia',
         'type'    => 'file',
         'options' => array(
             'url' => false,
         ),
         'text'    => array(
-            'add_upload_file_text' => 'Adicionar vídeo'
+            'add_upload_file_text' => 'Adicionar'
         ),
         'query_args' => array(
-            'type' => array('video/webm'),
-            'type' => array('video/mp4'),
+            // 'type' => array('video/webm'),
+            // 'type' => array('video/mp4'),
+            'type' => array('image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'),
         ),
         'preview_size' => 'medium',
     ));

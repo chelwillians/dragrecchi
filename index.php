@@ -116,16 +116,18 @@ if (have_posts()) :
                     </div>
                 <?php endif; ?>
                 <ul class="image-text__bullets">
-                    <?php foreach (get_field_cmb2('list') as $index => $item): ?>
-                        <li class="image-text__bullets-item">
-                            <?php if (!empty($item['icon'])): ?>
-                                <img class="image-text__bullets-icon" src="<?= $item['icon'] ?>" alt="<?= !empty(get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>" />
-                            <?php endif; ?>
-                            <?php if (!empty($item['text'])): ?>
-                                <span><?= $item['text'] ?></span>
-                            <?php endif; ?>
-                        </li>
-                    <?php endforeach; ?>
+                    <?php if (!empty(get_field_cmb2('list'))): ?>
+                        <?php foreach (get_field_cmb2('list') as $index => $item): ?>
+                            <li class="image-text__bullets-item">
+                                <?php if (!empty($item['icon'])): ?>
+                                    <img class="image-text__bullets-icon" src="<?= $item['icon'] ?>" alt="<?= !empty(get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['icon'], '_wp_attachment_image_alt', TRUE) : 'Imagem do banner' ?>" />
+                                <?php endif; ?>
+                                <?php if (!empty($item['text'])): ?>
+                                    <span><?= $item['text'] ?></span>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -133,7 +135,7 @@ if (have_posts()) :
 <?php endif; ?>
 
 <?php if (!empty(get_field_cmb2('testmonials_show'))): ?>
-    <section class="testimonials">
+    <section class="testimonials testimonials--image">
         <div class="container wrap">
             <div class="testimonials__call">
                 <?php if (!empty(get_field_cmb2('testmonials_title'))): ?>
@@ -152,14 +154,17 @@ if (have_posts()) :
                     $video_url = $item['video'];
                     $ext = pathinfo($video_url, PATHINFO_EXTENSION); // pega a extensão (mp4, webm, etc.)
                     $type = "video/" . strtolower($ext); // gera o type automaticamente
+                    if (1 == 0):
                     ?>
 
-                    <div class="testimonials__item">
-                        <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto">
-                            <source src="<?= esc_url($video_url) ?>" type="<?= esc_attr($type) ?>">
-                            Seu navegador não suporta vídeos HTML5.
-                        </video>
-                    </div>
+                        <div class="testimonials__item">
+                            <video class="depoimento-video" width="100%" height="auto" autoplay muted playsinline loop preload="auto">
+                                <source src="<?= esc_url($video_url) ?>" type="<?= esc_attr($type) ?>">
+                                Seu navegador não suporta vídeos HTML5.
+                            </video>
+                        </div>
+                    <?php endif; ?>
+                    <img src="<?= $item['video'] ?>" alt="<?= !empty(get_post_meta($item['video_id'], '_wp_attachment_image_alt', TRUE)) ? get_post_meta($item['video_id'], '_wp_attachment_image_alt', TRUE) : 'Imagem' ?>" class="testimonials__item">
                 <?php endforeach; ?>
             </div>
         </div>
@@ -230,9 +235,9 @@ if (have_posts()) :
                             <h3 class="contacts__item-title"><?= $item['title'] ?></h3>
                         <?php endif; ?>
                         <?php if (!empty($item['desc'])): ?>
-                        <div class="contacts__item-desc">
-                            <?= wpautop($item['desc']) ?>
-                        </div>
+                            <div class="contacts__item-desc">
+                                <?= wpautop($item['desc']) ?>
+                            </div>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
